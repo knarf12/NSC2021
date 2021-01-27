@@ -1,0 +1,7 @@
+Background and aims: In a little over six months, the Corona virus epidemic has affected over ten million and killed over half a million people worldwide as on June 30, 2020. With no vaccine in sight, the spread of the virus is likely to continue unabated. This article aims to analyze the time series data for top five countries affected by the COVID-19 for forecasting the spread of the epidemic.
+
+Material and methods: Daily time series data from 15th February to June 30, 2020 of total infected cases from the top five countries namely US, Brazil, India, Russia and Spain were collected from the online database. ARIMA model specifications were estimated using Hannan and Rissanen algorithm. Out of sample forecast for the next 77 days was computed using the ARIMA models.
+
+Results: Forecast for the first 18 days of July was compared with the actual data and the forecast accuracy was using MAD and MAPE were found within acceptable agreement. The graphic plots of forecast data suggest that While Russia and Spain have reached the inflexion point in the spread of epidemic, the US, Brazil and India are still experiencing an exponential curve.
+
+Conclusion: Our analysis shows that India and Brazil will hit 1.38 million and 2.47 million mark while the US will reach the 4.29 million mark by 31st July. With no effective cure available at the moment, this forecast will help the governments to be better prepared to combat the epidemic by ramping up their healthcare facilities.
