@@ -87,12 +87,12 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 		add(btnSearch);
 		
 		rdbtnLocal = new JRadioButton("Single Document");
-		rdbtnLocal.setFont(new Font("Consolas", Font.PLAIN, 14));
+		rdbtnLocal.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		rdbtnLocal.setBounds(114, 190, 164, 23);
 		add(rdbtnLocal);
 		
 		rdbtnPubmed = new JRadioButton("Multi Document");
-		rdbtnPubmed.setFont(new Font("Consolas", Font.PLAIN, 14));
+		rdbtnPubmed.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		rdbtnPubmed.setBounds(279, 190, 143, 23);
 		add(rdbtnPubmed);
 		
@@ -106,6 +106,36 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 		
 		bgSearch.add(rdbtnLocal);
 		bgSearch.add(rdbtnPubmed);
+		
+		JLabel lbsl = new JLabel("Select Algorithm :");
+		lbsl.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbsl.setBounds(127, 230, 132, 23);
+		add(lbsl);
+		
+		JRadioButton rdKnn = new JRadioButton("KNN");
+		rdKnn.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		rdKnn.setBounds(651, 231, 66, 23);
+		add(rdKnn);
+		
+		JRadioButton rdBM25 = new JRadioButton("BM25+");
+		rdBM25.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		rdBM25.setBounds(279, 231, 74, 23);
+		add(rdBM25);
+		
+		JRadioButton rdCosine = new JRadioButton("Cosine Similarity");
+		rdCosine.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		rdCosine.setBounds(372, 231, 132, 23);
+		add(rdCosine);
+		
+		JRadioButton rdNaive = new JRadioButton("Naive Bayes");
+		rdNaive.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		rdNaive.setBounds(521, 231, 109, 23);
+		add(rdNaive);
+		
+		JRadioButton rdDeep = new JRadioButton("Deep learning");
+		rdDeep.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		rdDeep.setBounds(737, 231, 109, 23);
+		add(rdDeep);
 	}
 
 	@Override

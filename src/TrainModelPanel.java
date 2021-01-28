@@ -291,7 +291,7 @@ public class TrainModelPanel extends JPanel implements ActionListener{
 		
 		tftotal = new JTextField();
 		tftotal.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		tftotal.setBounds(690, 648, 86, 20);
+		tftotal.setBounds(690, 648, 70, 23);
 		tftotal.setEditable(false);
 		add(tftotal);
 		tftotal.setColumns(10);
@@ -300,7 +300,7 @@ public class TrainModelPanel extends JPanel implements ActionListener{
 		tfload.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		tfload.setColumns(10);
 		tfload.setEditable(false);
-		tfload.setBounds(690, 439, 86, 20);
+		tfload.setBounds(690, 439, 70, 23);
 		add(tfload);
 	}
 
