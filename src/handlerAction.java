@@ -43,7 +43,7 @@ public class handlerAction implements ActionListener{
 			if(algorithm.equalsIgnoreCase("BM25+")) {
 				getDocSymptom(midProcess.evaluaBM25, 0.8);
 			}else if (algorithm.equalsIgnoreCase("Cosine")) {
-				System.out.println("Cosine");
+				//System.out.println("Cosine");
 				getDocSymptom(midProcess.evaluaCosine,0.1);
 			}else if (algorithm.equalsIgnoreCase("KNN")) {
 				//getDocSymptom();
@@ -61,7 +61,7 @@ public class handlerAction implements ActionListener{
 			TrainModelPanel.clearTextArea();
 			
 			if(algorithm.equalsIgnoreCase("BM25+")) {
-				getDocDiagnosis(midProcess.evaluaBM25, 0.65);
+				getDocDiagnosis(midProcess.evaluaBM25, 0.8);
 			}else if (algorithm.equalsIgnoreCase("Cosine")) {
 				//System.out.println("Cosine");
 				getDocDiagnosis(midProcess.evaluaCosine, 0.1);
@@ -79,7 +79,7 @@ public class handlerAction implements ActionListener{
 		}else if(e.getActionCommand().equalsIgnoreCase("Reflection")) {
 			TrainModelPanel.clearTextArea();
 			if(algorithm.equalsIgnoreCase("BM25+")) {
-				getDocReflection(midProcess.evaluaBM25, 0.65);
+				getDocReflection(midProcess.evaluaBM25, 0.8);
 				
 				
 			}else if (algorithm.equalsIgnoreCase("Cosine")) {
@@ -201,7 +201,7 @@ public class handlerAction implements ActionListener{
 		Double r2 =0.0d;
 		Double r3 =0.0d;
 		if(algorithm.equalsIgnoreCase("BM25+")) {
-			r1 = 0.65; r2 = 0.65; r3=0.8;
+			r1 = 0.8; r2 = 0.8; r3=0.8;
 		}else if (algorithm.equalsIgnoreCase("Cosine")) {
 			r1=0.1; r2=0.1; r3=0.1;
 		}else if (algorithm.equalsIgnoreCase("KNN")) {

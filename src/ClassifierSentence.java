@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -28,20 +29,19 @@ public class ClassifierSentence {
 	private static HashMap<Integer, ArrayList<Integer>> VtDocTr = new HashMap<Integer, ArrayList<Integer>>();
 	private static HashMap<Integer, ArrayList<Double>> evaluaCosine = new HashMap<Integer, ArrayList<Double>>();
 	private static HashMap<Integer, ArrayList<Double>> evaluaBM25 = new HashMap<Integer, ArrayList<Double>>();
+	private static HashMap<Integer, String> docKNN = new HashMap<Integer, String>();
 	
 	public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException {
 		stopword = Files.readAllLines(Paths.get("./dic/stopwordAndSpc_eng.txt"));
 		loadSingleFile("./data/dataSS/2.xml");
 		loadTrainset("./data/data-Diag");
+		
 		//vector
 		for (int i = 0; i < singleDoc.size(); i++) {
 			VtDoclist.put(i,mathMethod.getVector(singleDoc.get(i), wordList));
-			//System.out.println(singleDoc.get(i));
-			//System.out.println(mathMethod.getVector(singleDoc.get(i), wordList));
 		}
 		
 		for (int i = 0; i < sigleType.size(); i++) {
-			//if (i== 26 || i==21) System.out.println(mathMethod.getVector(sigleType.get(i), wordList));
 			VtDocTr.put(i, mathMethod.getVector(sigleType.get(i), wordList));
 		}
 		//end vector
@@ -65,15 +65,16 @@ public class ClassifierSentence {
 			}
 			evaluaBM25.put(j, similar);
 		}
-		//System.out.println(bm25F.getAllST(VtDoclist));
-//		System.out.println(evaluaCosine);
-//		System.out.println(evaluaBM25);
+		
+		//KNN
+		for (int i = 0; i < VtDoclist.size(); i++) {
+			knnAlgorithm.checkKNN(VtDoclist.get(i), VtDocTr);
+		}
+		
 		DecimalFormat df2 = new DecimalFormat("#.##");
-		//System.out.println(evaluaBM25.size());
 		for (int i = 0; i < evaluaBM25.size(); i++) {
 			Double sum = 0.0d;
 			int d=0;
-			//System.out.println("////////////////////////////////////////////////");
 			for (int k = 0; k < evaluaBM25.get(0).size(); k++) {
 				
 				sum += sum + evaluaBM25.get(i).get(k);
@@ -83,9 +84,10 @@ public class ClassifierSentence {
 				}
 			}
 			if(d==1)System.out.println(originalDoc.get(i));
-//			System.out.println(sum);
-//			System.out.println(sum/evaluaBM25.get(0).size());
 		}
+		
+		
+		
 		
 	}
 	public ClassifierSentence() {
@@ -123,7 +125,6 @@ public class ClassifierSentence {
 			singleDoc.put(i, oneDoc);
 			i+=1;
 		}
-		//System.out.println(singleDoc);
 	}
 	
 	private static void loadTrainset(String path) throws IOException{
@@ -138,12 +139,8 @@ public class ClassifierSentence {
             	
                 br = new BufferedReader(new FileReader(path+"/"+filename));
                 String line = br.readLine();
-                //System.out.println(i);
-                //System.out.println(line);
                 for(String sentence : line.split("[:\\.]")) {
                 	ArrayList<String> oneDoc = new ArrayList<String>();
-    				//ArrayList<String> oneLine = new ArrayList<String>();
-                	//System.out.println(sentence);
 	    			for (String word : sentence.split("[,.() ; % : / \t -]")) {
 						word = word.toLowerCase();
 						if(word.length()>1 && ! mathMethod.isNumeric(word)) {
@@ -153,23 +150,17 @@ public class ClassifierSentence {
 							}
 						}
 	    			}
-	    			
 					oneDoc.removeAll(stopword);
-					//if(kk == 21 || kk== 26)System.out.println(oneDoc);
-					//System.out.println(kk);
 					sigleType.put(kk, oneDoc);
 					kk +=1;
                 }
     			br.close();
             }
         }
-        
-//       System.out.println(sigleType);
 	}
 	
 	
 	void loadMutiFile() {
-		// TODO Auto-generated method stub
 	}
 	
 	public static ArrayList<String> ReadXML(NodeList nodeList) {

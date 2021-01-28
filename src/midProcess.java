@@ -206,19 +206,23 @@ public class midProcess {
 			}
 			evaluaBM25.put(j, similar);
 		}
-		
 
-//		System.out.println("Docs\t Content \t\t keyword");
-		DecimalFormat df2 = new DecimalFormat("#.##");
-		for (int j = 1; j <= evaluaCosine.size(); j++) {
-			int sno= 1;
-			System.out.println("\t\t\tCosine \t||\t BM25+");
-			for (int j2 = 0; j2 < VtDocTr.size(); j2++) {
-				System.out.print("Doc : "+j+" Doc Train : "+sno+"\t ");
-				System.out.print(df2.format(evaluaCosine.get(j).get(j2))+" \t||\t "+df2.format(evaluaBM25.get(j).get(j2))+"\n");
-				sno++;
-			}System.out.println();
+		//KNN
+		for (int i = 1; i <= VtDoclist.size(); i++) {
+			knnAlgorithm.checkKNNDoc(VtDoclist.get(i), VtDocTr);;
 		}
+		
+//		System.out.println("Docs\t Content \t\t keyword");
+//		DecimalFormat df2 = new DecimalFormat("#.##");
+//		for (int j = 1; j <= evaluaCosine.size(); j++) {
+//			int sno= 1;
+//			System.out.println("\t\t\tCosine \t||\t BM25+");
+//			for (int j2 = 0; j2 < VtDocTr.size(); j2++) {
+//				System.out.print("Doc : "+j+" Doc Train : "+sno+"\t ");
+//				System.out.print(df2.format(evaluaCosine.get(j).get(j2))+" \t||\t "+df2.format(evaluaBM25.get(j).get(j2))+"\n");
+//				sno++;
+//			}System.out.println();
+//		}
 	}
 	
 	private static void splitWord() {

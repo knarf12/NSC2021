@@ -20,69 +20,104 @@ public class knnAlgorithm {
 	 */
 	
 	private static int K = 0;
-	private static HashMap<Integer, ArrayList<String>> VtDocTr = new HashMap<Integer, ArrayList<String>>();
+//	private static HashMap<Integer, ArrayList<Integer>> VtDocTr = new HashMap<Integer, ArrayList<Integer>>();
 	private static mathMethod math = new mathMethod();
 
 	public knnAlgorithm() {	
 		
 	}
 	
-	protected static void loadTrainmodel(){
-		BufferedReader reader;
-		try {
-			reader = new BufferedReader(new FileReader(
-					"data/model/Model.txt"));
-			String line = reader.readLine();
-			int i = 1;
-			while (line != null) {
-				ArrayList<String> wordAll = new  ArrayList<String>();
-				String name = "";
-				for(String word : line.split(" ")) {
-						wordAll.add(word); 
-				}
-				
-				VtDocTr.put(i, wordAll);
-				i++;
-				line = reader.readLine();
-			}
-			
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	protected static void loadTrainmodel(){
+//		BufferedReader reader;
+//		try {
+//			reader = new BufferedReader(new FileReader(
+//					"data/model/Model.txt"));
+//			String line = reader.readLine();
+//			int i = 1;
+//			while (line != null) {
+//				ArrayList<String> wordAll = new  ArrayList<String>();
+//				String name = "";
+//				for(String word : line.split(" ")) {
+//						wordAll.add(word); 
+//				}
+//				
+//				VtDocTr.put(i, wordAll);
+//				i++;
+//				line = reader.readLine();
+//			}
+//			
+//			reader.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	private static Double distance(int A , int B) {
 		if ((A-B) == 0) {
 			return 0.0d;
 		}else {
 			Double num = Math.pow((A-B),2);
-			return Math.sqrt(num);
+			return (num);
 		}
 	}
-	
 	
 	@SuppressWarnings("unused")
-	private static void checkK(ArrayList<Integer> VtDocTest) {
-		double[] distanceDoc = new double[VtDocTr.size()];
-		double[] distanceMax = new double[VtDocTr.size()];
-		for (int j=1; j<= VtDocTr.size(); j++) {
+	static void checkKNN(ArrayList<Integer> VtDocTest, HashMap<Integer, ArrayList<Integer>> VtDocTr) {
+		Double[] distanceDoc = new Double[VtDocTr.size()];
+		Double[] distanceMax = new Double[VtDocTr.size()];
+		//System.out.println(VtDocTest);
+		//System.out.println(VtDocTr.size());
+		for (int j=0; j< VtDocTr.size(); j++) {
 			Double sum = 0.0d;
-			//System.out.println(VtDocTr.get(j));
 			for (int i=0; i < VtDocTest.size(); i++) {
-				if(i<VtDocTr.get(j).size()-1) {
-					int parseInt = Integer.parseInt(VtDocTr.get(j).get(i));
-					sum += sum + distance(VtDocTest.get(i),parseInt);
-				}
+				sum =sum + distance(VtDocTest.get(i),VtDocTr.get(j).get(i));
 			}
-			distanceDoc[j-1]=(sum);
+			distanceDoc[j]=Math.sqrt(sum);
 		}
-		
-		distanceMax = math.bubbleSort(distanceDoc);
+		distanceMax = bubbleSort(distanceDoc);
 		
 		for (int i=0; i< distanceMax.length; i++) {
-			System.out.println(distanceMax[i]);
-		}
+			System.out.println(distanceMax[i]+"\t"+distanceDoc[i]);
+		}System.out.println();
 	}
+	
+	static void checkKNNDoc(ArrayList<Integer> VtDocTest, HashMap<Integer, ArrayList<Integer>> VtDocTr) {
+		Double[] distanceDoc = new Double[VtDocTr.size()];
+		Double[] distanceMax = new Double[VtDocTr.size()];
+		//System.out.println(VtDocTest);
+		//System.out.println(VtDocTr.size());
+		for (int j=0; j< VtDocTr.size(); j++) {
+			Double sum = 0.0d;
+			for (int i=0; i < VtDocTest.size(); i++) {
+				sum =sum + distance(VtDocTest.get(i),VtDocTr.get(j).get(i));
+			}
+			System.out.println(Math.sqrt(sum));
+			distanceDoc[j]=Math.sqrt(sum);
+		}System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+		distanceMax = bubbleSort(distanceDoc);
+		
+//		for (int i=0; i< distanceMax.length; i++) {
+//			System.out.println(distanceMax[i]+"\t"+distanceDoc[i]);
+//		}System.out.println();
+	}
+	
+	static Double[] bubbleSort(Double[] arr) 
+	{ 
+	    int n = arr.length; 
+	    for (int i = 0; i < n-1; i++) {
+	    	 for (int j = 0; j < n-i-1; j++) {
+	    		 if (arr[j] > arr[j+1]) 
+		            { 
+		                // swap arr[j+1] and arr[j] 
+		            	Double temp = arr[j]; 
+		                arr[j] = arr[j+1]; 
+		                arr[j+1] = temp; 
+		            } 
+		      } 
+	    }
+	    return arr;
+	} 
+
+
 	
 }
