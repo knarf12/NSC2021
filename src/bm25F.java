@@ -19,12 +19,30 @@ public class bm25F {
 		//System.out.println(doc_avd);
 		for (int i = 0; i < VtDocTest.size(); i++) {
 			if(VtDocTr.get(i)>0 ) {
+				
 				result += weigtingIDF.get(index) * (((VtDocTest.get(i)*(k_1+1)/(VtDocTest.get(i)+k_1*(1-b+b*(wordCount(VtDocTest)/doc_avd))))+delta));
 				index +=1;
 			}
 		}
 		//System.out.println(result);
 		return result/(130);
+	}
+	
+	public static Double BM25PlusST(ArrayList<Integer> VtDocTr,ArrayList<Integer> VtDocTest, ArrayList<Double> weigtingIDF) {
+		// TODO Auto-generated constructor stub
+		int index = 0;
+		Double result = 0.0d;
+		//System.out.println(doc_avd);
+		for (int i = 0; i < VtDocTest.size(); i++) {
+			if(VtDocTr.get(i)>0 ) {
+				//System.out.println(weigtingIDF.get(index) * (((VtDocTest.get(i)*(k_1+1)/(VtDocTest.get(i)+k_1*(1-b+b*(wordCount(VtDocTest)/doc_avd))))+delta)));
+				//System.out.println(i);
+				result += weigtingIDF.get(index) * (((VtDocTest.get(i)*(k_1+1))/(VtDocTest.get(i)+k_1*(1-b+b*(wordCount(VtDocTest)/doc_avd))))+delta);
+				index +=1;
+			}
+		}
+		//System.out.println(result);
+		return result;
 	}
 	
 	public static ArrayList<Double> getAll(HashMap<Integer, ArrayList<Integer>> Doc) {
@@ -40,6 +58,29 @@ public class bm25F {
 				}
 			}
 			//System.out.print(count);
+			weigtingIDF.add(IDF((double)count,docCount));
+			
+		}
+		//System.out.println();
+		//System.out.println(docCount);
+		return weigtingIDF;
+	}
+	
+public static ArrayList<Double> getAllST(HashMap<Integer, ArrayList<Integer>> Doc) {
+		
+		Double docCount =(double)Doc.size();
+		//System.out.println(Doc.get(1).size());
+		ArrayList<Double> weigtingIDF = new ArrayList<Double>();
+		for (int j = 0; j < Doc.get(1).size(); j++) {
+			int count = 0;
+			for (int i = 0; i < Doc.size(); i++) {
+				if(Doc.get(i).get(j)>0) {
+					count +=1;
+					//System.out.println(Doc.get(i).get(j));
+				}
+			}
+//			System.out.println(j);
+//			System.out.println(count);
 			weigtingIDF.add(IDF((double)count,docCount));
 			
 		}
@@ -70,6 +111,19 @@ public class bm25F {
 	public static void DocAVG(HashMap<Integer, ArrayList<Integer>> VtDocTest) {
 		Double sum= 0.0d;
 		for (int i = 1; i <= VtDocTest.size(); i++) {
+			for (int x : VtDocTest.get(i)) {
+				if(x>0) {
+					sum+=x;
+				}
+			}
+		}
+		doc_avd = sum/VtDocTest.size();
+		//System.out.println(doc_avd);
+	} 
+	
+	public static void DocAVGST(HashMap<Integer, ArrayList<Integer>> VtDocTest) {
+		Double sum= 0.0d;
+		for (int i = 0; i < VtDocTest.size(); i++) {
 			for (int x : VtDocTest.get(i)) {
 				if(x>0) {
 					sum+=x;
