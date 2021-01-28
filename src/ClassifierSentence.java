@@ -21,6 +21,7 @@ import org.w3c.dom.Element;
 public class ClassifierSentence {
 	private static List<String> stopword;
 	private static HashMap<Integer, ArrayList<String>> singleDoc = new HashMap<Integer, ArrayList<String>>();
+	private static ArrayList<String> originalDoc = new ArrayList<String>();
 	private static ArrayList<String> wordList = new ArrayList<String>();
 	private static HashMap<Integer, ArrayList<String>> sigleType = new HashMap<Integer, ArrayList<String>>();
 	private static HashMap<Integer, ArrayList<Integer>> VtDoclist = new HashMap<Integer, ArrayList<Integer>>();
@@ -30,9 +31,8 @@ public class ClassifierSentence {
 	
 	public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException {
 		stopword = Files.readAllLines(Paths.get("./dic/stopwordAndSpc_eng.txt"));
-		loadSingleFile("./data/dataSS/3.xml");
+		loadSingleFile("./data/dataSS/2.xml");
 		loadTrainset("./data/data-Diag");
-		
 		//vector
 		for (int i = 0; i < singleDoc.size(); i++) {
 			VtDoclist.put(i,mathMethod.getVector(singleDoc.get(i), wordList));
@@ -69,17 +69,20 @@ public class ClassifierSentence {
 //		System.out.println(evaluaCosine);
 //		System.out.println(evaluaBM25);
 		DecimalFormat df2 = new DecimalFormat("#.##");
-		System.out.println(evaluaBM25.size());
+		//System.out.println(evaluaBM25.size());
 		for (int i = 0; i < evaluaBM25.size(); i++) {
 			Double sum = 0.0d;
-			System.out.println("////////////////////////////////////////////////");
+			int d=0;
+			//System.out.println("////////////////////////////////////////////////");
 			for (int k = 0; k < evaluaBM25.get(0).size(); k++) {
 				
 				sum += sum + evaluaBM25.get(i).get(k);
 				if(evaluaBM25.get(i).get(k)>15.0d) {
-					System.out.println(k+" "+df2.format(+evaluaCosine.get(i).get(k))+" \t: "+df2.format(evaluaBM25.get(i).get(k)));
+					//System.out.println(k+"\t"+df2.format(+evaluaCosine.get(i).get(k))+"\t:\t"+df2.format(evaluaBM25.get(i).get(k)));
+					d=1;
 				}
 			}
+			if(d==1)System.out.println(originalDoc.get(i));
 //			System.out.println(sum);
 //			System.out.println(sum/evaluaBM25.get(0).size());
 		}
@@ -105,8 +108,9 @@ public class ClassifierSentence {
 		int i = 0;
 		for(String sentence : Doc.split("[:\\.]")) {
 			//System.out.println(sentence);
+			originalDoc.add(sentence);
 			ArrayList<String> oneDoc = new ArrayList<String>();
-			for (String word : sentence.split("[,.() ; % : / \t -]")) {
+			for (String word : sentence.split("[\\-\\[,.() ; % : / \t]")) {
 				word = word.toLowerCase();
 				if(word.length()>1 && ! mathMethod.isNumeric(word)) {
 					oneDoc.add(word);
@@ -151,7 +155,7 @@ public class ClassifierSentence {
 	    			}
 	    			
 					oneDoc.removeAll(stopword);
-					if(kk == 21 || kk== 26)System.out.println(oneDoc);
+					//if(kk == 21 || kk== 26)System.out.println(oneDoc);
 					//System.out.println(kk);
 					sigleType.put(kk, oneDoc);
 					kk +=1;
