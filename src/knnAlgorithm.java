@@ -93,7 +93,7 @@ public class knnAlgorithm {
 			}
 			System.out.println(Math.sqrt(sum));
 			distanceDoc[j]=Math.sqrt(sum);
-		}System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+		}//System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
 		distanceMax = bubbleSort(distanceDoc);
 		
 //		for (int i=0; i< distanceMax.length; i++) {

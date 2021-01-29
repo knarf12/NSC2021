@@ -31,9 +31,9 @@ public class ClassifierSentence {
 	private static HashMap<Integer, ArrayList<Double>> evaluaBM25 = new HashMap<Integer, ArrayList<Double>>();
 	private static HashMap<Integer, String> docKNN = new HashMap<Integer, String>();
 	
-	public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException {
+	public ClassifierSentence(String path) throws SAXException, IOException, ParserConfigurationException {
 		stopword = Files.readAllLines(Paths.get("./dic/stopwordAndSpc_eng.txt"));
-		loadSingleFile("./data/dataSS/2.xml");
+		loadSingleFile(path);
 		loadTrainset("./data/data-Diag");
 		
 		//vector
@@ -83,15 +83,11 @@ public class ClassifierSentence {
 					d=1;
 				}
 			}
-			if(d==1)System.out.println(originalDoc.get(i));
+			if(d==1) {
+				System.out.println(originalDoc.get(i));
+				UsageModelPanel.showSentence(originalDoc.get(i));
+			}
 		}
-		
-		
-		
-		
-	}
-	public ClassifierSentence() {
-		
 	}
 	
 	static void loadSingleFile(String path) throws SAXException, IOException, ParserConfigurationException{
@@ -111,6 +107,7 @@ public class ClassifierSentence {
 		for(String sentence : Doc.split("[:\\.]")) {
 			//System.out.println(sentence);
 			originalDoc.add(sentence);
+			UsageModelPanel.showDoc(sentence);
 			ArrayList<String> oneDoc = new ArrayList<String>();
 			for (String word : sentence.split("[\\-\\[,.() ; % : / \t]")) {
 				word = word.toLowerCase();

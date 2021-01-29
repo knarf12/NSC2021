@@ -148,7 +148,6 @@ public class TrainModelPanel extends JPanel implements ActionListener{
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(306, 465, 680, 155);
 		
-		
 		textArea_1 = new JTextArea();
 		textArea_1.setFont(new Font("Consolas", Font.PLAIN, 13));
 		scrollPane_2.setViewportView(textArea_1);

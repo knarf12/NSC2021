@@ -49,7 +49,6 @@ public class handlerAction implements ActionListener{
 				//getDocSymptom();
 				getKNN(midProcess.evaluaBM25,"Symptom");
 			}else if (algorithm.equalsIgnoreCase("NV")) {
-				
 				//getDocSymptom();
 			}else if (algorithm.equalsIgnoreCase("Deep")) {
 				//getDocSymptom();
