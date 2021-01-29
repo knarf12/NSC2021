@@ -332,7 +332,6 @@ public class TrainModelPanel extends JPanel implements ActionListener{
 				}
 			}
 		}
-	
 		if(obj.equals(btnSearch)) {
 			if (h.choice.equalsIgnoreCase("Pubmed")) {
 				//System.out.println("Pubmed");
