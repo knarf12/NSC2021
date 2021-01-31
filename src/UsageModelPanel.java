@@ -111,6 +111,8 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 		textArea = new JTextArea();
 		textArea.setBackground(Color.WHITE);
 		textArea.setEditable(false);
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
 		//textArea.setBounds(333, 313, 504, 373);
 		//add(textArea);
 		//textArea.setText("1234");

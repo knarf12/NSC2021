@@ -29,9 +29,9 @@ public class handlerAction implements ActionListener{
 				getDocAll(midProcess.evaluaCosine,"Cosine");
 			}else if (algorithm.equalsIgnoreCase("KNN")) {
 				//getDocSymptom();
-				getDocAll(midProcess.evaluaBM25,"KNN");
+				getKNN("All");
 			}else if (algorithm.equalsIgnoreCase("NV")) {
-				//getDocSymptom();
+				getNVB("All");
 			}else if (algorithm.equalsIgnoreCase("Deep")) {
 				//getDocSymptom();
 			}
@@ -47,12 +47,12 @@ public class handlerAction implements ActionListener{
 				getDocSymptom(midProcess.evaluaCosine,0.1);
 			}else if (algorithm.equalsIgnoreCase("KNN")) {
 				//getDocSymptom();
-				getKNN(midProcess.evaluaBM25,"Symptom");
+				getKNN("Symptom");
 			}else if (algorithm.equalsIgnoreCase("NV")) {
 				//getDocSymptom();
+				getNVB("Symptom");
 			}else if (algorithm.equalsIgnoreCase("Deep")) {
 				//getDocSymptom();
-				
 			}
 			
 		}else if(e.getActionCommand().equalsIgnoreCase("Diagnosis")) {
@@ -66,12 +66,11 @@ public class handlerAction implements ActionListener{
 				getDocDiagnosis(midProcess.evaluaCosine, 0.1);
 			}else if (algorithm.equalsIgnoreCase("KNN")) {
 				//getDocDiagnosis();
-				getKNN(midProcess.evaluaBM25,"Reflec");
+				getKNN("Reflec");
 			}else if (algorithm.equalsIgnoreCase("NV")) {
-				
+				getNVB("Reflec");
 				//getDocDiagnosis();
 			}else if (algorithm.equalsIgnoreCase("Deep")) {
-				
 				//getDocDiagnosis();
 			}
 			
@@ -79,26 +78,17 @@ public class handlerAction implements ActionListener{
 			TrainModelPanel.clearTextArea();
 			if(algorithm.equalsIgnoreCase("BM25+")) {
 				getDocReflection(midProcess.evaluaBM25, 0.8);
-				
-				
 			}else if (algorithm.equalsIgnoreCase("Cosine")) {
 //				System.out.println("Cosine");
 				getDocReflection(midProcess.evaluaCosine, 0.1);
-				
-				
 			}else if (algorithm.equalsIgnoreCase("KNN")) {
-				getKNN(midProcess.evaluaBM25,"Diag");
+				getKNN("Diag");
 				//getDocReflection();
-				
-				
 			}else if (algorithm.equalsIgnoreCase("NV")) {
 				//getDocReflection();
-				
-				
+				getNVB("Diag");
 			}else if (algorithm.equalsIgnoreCase("Deep")) {
 				//getDocReflection();
-				
-				
 			}
 		}
 		
@@ -106,18 +96,12 @@ public class handlerAction implements ActionListener{
 		if(e.getActionCommand().equalsIgnoreCase("Deep Learning")) {
 			algorithm = "Deep";
 			TrainModelPanel.bgWeight2.clearSelection();
-			
-			
 		}else if(e.getActionCommand().equalsIgnoreCase("Unsupervised Learning")) {
 			weight = "UTW";
 			TrainModelPanel.setFalse("UTW");
-			
-			
 		}else if(e.getActionCommand().equalsIgnoreCase("Supervised Learning")) {
 			weight = "STW";
 			TrainModelPanel.setFalse("STW");
-			
-			
 		}
 		
 		//algorithm select
@@ -142,8 +126,8 @@ public class handlerAction implements ActionListener{
 		int s=0;
 		for (int i = 1; i <= evalua.size(); i++) {
 			int k = 0;
-			for (int j = 4; j < evalua.get(i).size(); j++) {
-				if (evalua.get(i).get(j) >= rate && j<13) {
+			for (int j = 10; j < evalua.get(i).size(); j++) {
+				if (evalua.get(i).get(j) >= rate && j<20) {
 					k++;
 				}
 			}
@@ -163,11 +147,11 @@ public class handlerAction implements ActionListener{
 			int k = 0;
 			for (int j = 0; j < evalua.get(1).size(); j++) {
 				//System.out.println(j+" "+ midProcess.evaluaBM25.get(i).get(j));
-				if (j<4 && evalua.get(i).get(j) >= rate) {
+				if (j<10 && evalua.get(i).get(j) >= rate) {
 					k++;
 				}
 			}
-			if(k>2) {
+			if(k>=5) {
 				s+=1;
 				TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i-1));
 			}
@@ -181,13 +165,13 @@ public class handlerAction implements ActionListener{
 		int s=0;
 		for (int i = 1; i <= evalua.size(); i++) {
 			int k = 0;
-			for (int j = 13; j < evalua.get(i).size(); j++) {
+			for (int j = 20; j < evalua.get(i).size(); j++) {
 				
 				if (evalua.get(i).get(j) >= rate ) {
 					k++;
 				}
 			}
-			if(k>2) {
+			if(k>=5) {
 				s+=1;
 				TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i-1));
 			}
@@ -203,14 +187,9 @@ public class handlerAction implements ActionListener{
 			r1 = 0.8; r2 = 0.8; r3=0.8;
 		}else if (algorithm.equalsIgnoreCase("Cosine")) {
 			r1=0.1; r2=0.1; r3=0.1;
-		}else if (algorithm.equalsIgnoreCase("KNN")) {
-			r1 = 0.65; r2 = 0.65; r3=0.8;
 		}else if (algorithm.equalsIgnoreCase("NV")) {
 			
-		}else if (algorithm.equalsIgnoreCase("Deep")) {
-			
 		}
-		
 		if(r1>0) {
 			int s=0;
 			for (int i = 1; i <= evalua.size(); i++) {
@@ -219,15 +198,15 @@ public class handlerAction implements ActionListener{
 				int k3 =0;
 				for (int j = 0; j < evalua.get(i).size(); j++) {
 					
-					if (evalua.get(i).get(j) >= r1 && j<4) {
+					if (evalua.get(i).get(j) >= r1 && j<10) {
 						k++;
-					}else if (evalua.get(i).get(j) >= r2 && j<13) {
+					}else if (evalua.get(i).get(j) >= r2 && j<20) {
 						k2++;
 					}else if(evalua.get(i).get(j) >= r3 ){
 						k3++;
 					}
 				}
-				if(k>2 || k2>=5 || k3 >2) {
+				if(k>=5 || k2>=5 || k3 >=5) {
 					s+=1;
 					TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i-1));
 				}
@@ -236,11 +215,44 @@ public class handlerAction implements ActionListener{
 		}
 	}
 	
-	private void getKNN(HashMap<Integer, ArrayList<Double>> evalua, String name) {
-		Double rate = 0.8;
+	private void getKNN(String name) {
 		int s=0;
-		for (int i = 1; i <= evalua.size(); i++) {
-			
+		for (int i = 0; i < midProcess.evaluaKNN.size(); i++) {
+			if(name.equalsIgnoreCase("Symptom") && midProcess.evaluaKNN.get(i).equalsIgnoreCase("symptom")) {
+				s+=1;
+				TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i));
+			}else if(name.equalsIgnoreCase("Diag")&& midProcess.evaluaKNN.get(i).equalsIgnoreCase("diagnosis")) {
+				s+=1;
+				TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i));
+			}else if(name.equalsIgnoreCase("Reflec")&& midProcess.evaluaKNN.get(i).equalsIgnoreCase("reflection")) {
+				s+=1;
+				TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i));
+			}
+			if(name.equalsIgnoreCase("All")) {
+				s+=1;
+				TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i));
+			}
+		}
+		TrainModelPanel.setText(""+s);
+	}
+	
+	private void getNVB(String name) {
+		int s=0;
+		for (int i = 0; i < midProcess.evaluaKNN.size(); i++) {
+			if(name.equalsIgnoreCase("Symptom") && midProcess.evaluaNVB.get(i).equalsIgnoreCase("symptom")) {
+				s+=1;
+				TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i));
+			}else if(name.equalsIgnoreCase("Diag")&& midProcess.evaluaNVB.get(i).equalsIgnoreCase("diagnosis")) {
+				s+=1;
+				TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i));
+			}else if(name.equalsIgnoreCase("Reflec")&& midProcess.evaluaNVB.get(i).equalsIgnoreCase("reflection")) {
+				s+=1;
+				TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i));
+			}
+			if(name.equalsIgnoreCase("All")) {
+				s+=1;
+				TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i));
+			}
 		}
 		TrainModelPanel.setText(""+s);
 	}

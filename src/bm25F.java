@@ -25,7 +25,7 @@ public class bm25F {
 			}
 		}
 		//System.out.println(result);
-		return result/(130);
+		return result/(170);
 	}
 	
 	public static Double BM25PlusST(ArrayList<Integer> VtDocTr,ArrayList<Integer> VtDocTest, ArrayList<Double> weigtingIDF) {

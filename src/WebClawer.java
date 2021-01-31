@@ -96,7 +96,7 @@ public class WebClawer {
 	
 	public static HashMap<String,String> Pull_with_id(String id_data) throws IOException, InterruptedException, TransformerException {
 		
-		HashMap<String, String> list_result = new HashMap<String, String>();
+			HashMap<String, String> list_result = new HashMap<String, String>();
 			
 			HttpClient client1 = HttpClient.newHttpClient();
 			String linkpa = "https://pubmed.ncbi.nlm.nih.gov/"+id_data+"/";
@@ -104,8 +104,8 @@ public class WebClawer {
 	                .uri(URI.create(linkpa))
 	                .build();
 //			 
-			 HttpResponse<String> response1 = client1.send(request1,
-		     HttpResponse.BodyHandlers.ofString());
+			HttpResponse<String> response1 = client1.send(request1,
+		    HttpResponse.BodyHandlers.ofString());
 		        
 
 			String resultHtml1 = response1.body().toString();

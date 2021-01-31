@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -14,7 +13,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.xml.parsers.ParserConfigurationException;
@@ -25,6 +23,7 @@ import javax.swing.JRadioButton;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
@@ -388,9 +387,11 @@ public class TrainModelPanel extends JPanel implements ActionListener{
 	protected static void setFalse(String name) {
 		bgWeight2.clearSelection();
 		if(name.equalsIgnoreCase("STW")) {
+			rdKNN.setSelected(true);
 			rdBM25.setSelected(false);
 			rdCS.setSelected(false);
-		}else if(name.equalsIgnoreCase("STW")) {
+		}else if(name.equalsIgnoreCase("UTW")) {
+			rdCS.setSelected(true);
 			rdKNN.setSelected(false);
 			rdNV.setSelected(false);
 		}

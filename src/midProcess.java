@@ -12,6 +12,11 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -23,6 +28,7 @@ public class midProcess {
 	private static ArrayList<String> wordList = new ArrayList<String>();
 	private static List<String> stopword;
 	public static ArrayList<String> nameDoc = new ArrayList<String>();
+	//public static ArrayList<String> abtDoc = new ArrayList<String>();
 	private static ArrayList<String> DocsTest = new ArrayList<String>();
 	private static HashMap<Integer, ArrayList<String>> DocTr = new HashMap<Integer, ArrayList<String>>();
 	private static HashMap<Integer, ArrayList<String>> Doclist = new HashMap<Integer, ArrayList<String>>();
@@ -31,6 +37,8 @@ public class midProcess {
 	static HashMap<Integer, ArrayList<Double>> evaluaCosine = new HashMap<Integer, ArrayList<Double>>();
 	private static HashMap<Integer, ArrayList<Double>> evaluaSSCosine = new HashMap<Integer, ArrayList<Double>>();
 	static HashMap<Integer, ArrayList<Double>> evaluaBM25 = new HashMap<Integer, ArrayList<Double>>();
+	static ArrayList<String> evaluaKNN = new ArrayList<String>();
+	static ArrayList<String> evaluaNVB = new ArrayList<String>();
 	//private static HashMap<Integer, ArrayList<Double>> evaluaSSBM25 = new HashMap<Integer, ArrayList<Double>>();
 	private static DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();  
 	private static File folder;
@@ -111,44 +119,6 @@ public class midProcess {
         }
 	}
 	
-//	@SuppressWarnings("static-access")
-//	private static void loadTrainset() throws IOException{
-//		folder = new File("./data/train");
-//        listOfFiles = folder.listFiles();
-//        BufferedReader br ;
-//        int k = 0;
-//        for(int i = 0; i < listOfFiles.length; i++){
-//            String filename = listOfFiles[i].getName();
-//            if(filename.endsWith(".txt")||filename.endsWith(".TXT")) {
-//                br = new BufferedReader(new FileReader("./data/train/"+filename));
-//                String line = br.readLine();
-//                ArrayList<String> oneDoc = new ArrayList<String>();
-//    			while (line != null) {
-//    				ArrayList<String> oneLine = new ArrayList<String>();
-//    				for (String word : line.split("[,.() ; % : / \t -]")) {
-//    					word = word.toLowerCase();
-//    					if(word.length()>1 && ! mathMethod.isNumeric(word)) {
-//    						if(i<1) {
-//    							oneLine.add(word);
-//    							DocTr.put(k, oneLine);
-//    						}else {
-//    							oneDoc.add(word);
-//    						}
-//    						if(!wordList.contains(word)) {
-//    							wordList.add(word);
-//    						}
-//    					}
-//    				}if(i<1) {
-//    					k++;
-//    				}
-//    				line = br.readLine();
-//    			}
-//    			DocTr.put(k, oneDoc);
-//    			br.close();
-//            }
-//        }
-//	}
-	
 	@SuppressWarnings("static-access")
 	public static void DataProcess() throws SAXException, IOException, ParserConfigurationException {
 		//System.out.println(nameDoc);
@@ -162,36 +132,36 @@ public class midProcess {
 		
 		for (int j = 1; j <= VtDoclist.size(); j++) {
 			ArrayList<Double> similar = new ArrayList<Double>();
+			int s=0 ,r=0, d =0;
 			for (int j2 = 0; j2 < VtDocTr.size(); j2++) {
 				similar.add(mathMethod.CosineSim(VtDocTr.get(j2), VtDoclist.get(j)));
 //					System.out.println(j2);
+				if(j2<10 && mathMethod.CosineSim(VtDocTr.get(j2), VtDoclist.get(j)) < 0.1) {
+					d++;
+				}else if(j2<20 && mathMethod.CosineSim(VtDocTr.get(j2), VtDoclist.get(j)) < 0.1) {
+					r++;
+				}else if(j2<30 && mathMethod.CosineSim(VtDocTr.get(j2), VtDoclist.get(j)) < 0.1) {
+					s++;
+				}
 			}
 			evaluaCosine.put(j, similar);
-		}
-		
-		for (int j = 0; j < VtDocTr.size(); j++) {
-			ArrayList<Double> similar = new ArrayList<Double>();
-			for (int j2 = 0; j2 < VtDocTr.size(); j2++) {
-				similar.add(mathMethod.CosineSim(VtDocTr.get(j2), VtDocTr.get(j)));
-//					System.out.println(j2);
+			if(d>=5) {
+				writeXML("./ClassifierDocFile/Cosine/",nameDoc.get(j-1),DocsTest.get(j-1),"diagnosis");
+			}else if(r>=5) {
+				writeXML("./ClassifierDocFile/Cosine/",nameDoc.get(j-1),DocsTest.get(j-1),"reflection");
+			}else if(s>=5){
+				writeXML("./ClassifierDocFile/Cosine/",nameDoc.get(j-1),DocsTest.get(j-1),"symptom");
 			}
-			evaluaSSCosine.put(j, similar);
 		}
 		
-//		System.out.println("Sentence to Sentence");
-//		for (int j = 0; j < evaluaSSCosine.size(); j++) {
-//			int sno= 1;
-//			for (Double num : evaluaSSCosine.get(j)) {
-//				System.out.print("Doc train :"+(j+1)+" "+sno+"\t");
-//				System.out.print(num+"\n");
-//				sno++;
-//			}System.out.println();
-//		}
-		
-//			System.out.println();
-//			for (int j = 0; j < evaluaCosine.size(); j++) {
-//				mathMethod.maxSimDoc(j, evaluaCosine);
+//		for (int j = 0; j < VtDocTr.size(); j++) {
+//			ArrayList<Double> similar = new ArrayList<Double>();
+//			for (int j2 = 0; j2 < VtDocTr.size(); j2++) {
+//				similar.add(mathMethod.CosineSim(VtDocTr.get(j2), VtDocTr.get(j)));
+////					System.out.println(j2);
 //			}
+//			evaluaSSCosine.put(j, similar);
+//		}
 		
 		//bm25+
 		ArrayList<Double> weigtingIDF = new ArrayList<Double>();
@@ -202,27 +172,19 @@ public class midProcess {
 			ArrayList<Double> similar = new ArrayList<Double>();
 			for (int j2 = 0; j2 < VtDocTr.size(); j2++) {
 				similar.add(bm25F.BM25Plus(VtDocTr.get(j2), VtDoclist.get(j), weigtingIDF));
-//					System.out.println(j2);
+				//System.out.println(j2);
 			}
 			evaluaBM25.put(j, similar);
+			
 		}
 
-		//KNN
+		//KNN && NVB
 		for (int i = 1; i <= VtDoclist.size(); i++) {
-			knnAlgorithm.checkKNNDoc(VtDoclist.get(i), VtDocTr);;
+			evaluaKNN.add(knnAlgorithm.checkKNNDoc(VtDoclist.get(i), VtDocTr));
+			writeXML("./ClassifierDocFile/KNN/",nameDoc.get(i-1),DocsTest.get(i-1),knnAlgorithm.checkKNNDoc(VtDoclist.get(i), VtDocTr));
+			evaluaNVB.add(NaiveBayes.NVprocess(VtDoclist.get(i), VtDocTr));
+			writeXML("./ClassifierDocFile/NVB/",nameDoc.get(i-1),DocsTest.get(i-1),NaiveBayes.NVprocess(VtDoclist.get(i), VtDocTr));
 		}
-		
-//		System.out.println("Docs\t Content \t\t keyword");
-//		DecimalFormat df2 = new DecimalFormat("#.##");
-//		for (int j = 1; j <= evaluaCosine.size(); j++) {
-//			int sno= 1;
-//			System.out.println("\t\t\tCosine \t||\t BM25+");
-//			for (int j2 = 0; j2 < VtDocTr.size(); j2++) {
-//				System.out.print("Doc : "+j+" Doc Train : "+sno+"\t ");
-//				System.out.print(df2.format(evaluaCosine.get(j).get(j2))+" \t||\t "+df2.format(evaluaBM25.get(j).get(j2))+"\n");
-//				sno++;
-//			}System.out.println();
-//		}
 	}
 	
 	private static void splitWord() {
@@ -244,6 +206,57 @@ public class midProcess {
 			i++;
 		}
 		wordList.removeAll(stopword);
+	}
+	
+	protected static void writeXML(String path, String ID, String abs,String cls) {
+		// TODO Auto-generated method stub
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder;
+        try {
+            dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.newDocument();
+            //add elements to Document
+            Element rootElement =doc.createElement("Data");
+            //append root element to document
+            doc.appendChild(rootElement);
+
+            rootElement.appendChild(getReviewsPositive(doc, ID, abs,cls));
+            //for output to file, console
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            //for pretty print
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource source = new DOMSource(doc);
+
+            //write to console or file
+            StreamResult console = new StreamResult(System.out);
+            StreamResult file = new StreamResult(new File(path+""+ID+".xml"));
+
+            //write data
+            transformer.transform(source, console);
+            transformer.transform(source, file);
+            //System.out.println("DONE");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
+	
+	
+	private static Node getReviewsPositive(org.w3c.dom.Document dom,String ID, String abs,String cls) {
+		org.w3c.dom.Element reviews = dom.createElement("Doc");
+		
+	    reviews.appendChild(getEmployeeElements(dom, reviews, "Doc_ID", ID));
+	    reviews.appendChild(getEmployeeElements(dom, reviews, "Class", cls));
+	    reviews.appendChild(getEmployeeElements(dom, reviews, "Abstract", abs));
+
+	    return reviews;
+	}
+
+	private static Node getEmployeeElements(org.w3c.dom.Document doc, org.w3c.dom.Element element, String name, String value) {
+		org.w3c.dom.Element node = doc.createElement(name);
+	    node.appendChild(doc.createTextNode(value));
+	    return node;
 	}
 	
 	public static ArrayList<String> ReadXML(NodeList nodeList) {

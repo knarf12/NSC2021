@@ -28,8 +28,9 @@ public class ClassifierSentence {
 	private static HashMap<Integer, ArrayList<Integer>> VtDoclist = new HashMap<Integer, ArrayList<Integer>>();
 	private static HashMap<Integer, ArrayList<Integer>> VtDocTr = new HashMap<Integer, ArrayList<Integer>>();
 	private static HashMap<Integer, ArrayList<Double>> evaluaCosine = new HashMap<Integer, ArrayList<Double>>();
-	private static HashMap<Integer, ArrayList<Double>> evaluaBM25 = new HashMap<Integer, ArrayList<Double>>();
-	private static HashMap<Integer, String> docKNN = new HashMap<Integer, String>();
+	static HashMap<Integer, ArrayList<Double>> evaluaBM25 = new HashMap<Integer, ArrayList<Double>>();
+	static HashMap<Integer, String> docKNN = new HashMap<Integer, String>();
+	static ArrayList<String> evaluaKNN = new ArrayList<String>();
 	
 	public ClassifierSentence(String path) throws SAXException, IOException, ParserConfigurationException {
 		stopword = Files.readAllLines(Paths.get("./dic/stopwordAndSpc_eng.txt"));
@@ -84,7 +85,7 @@ public class ClassifierSentence {
 				}
 			}
 			if(d==1) {
-				System.out.println(originalDoc.get(i));
+				//System.out.println(originalDoc.get(i));
 				UsageModelPanel.showSentence(originalDoc.get(i));
 			}
 		}
@@ -103,11 +104,11 @@ public class ClassifierSentence {
 		data.addAll(ReadXML(nodeList));
 		String Doc = data.get(0);
 		
+		UsageModelPanel.showDoc(Doc);
 		int i = 0;
 		for(String sentence : Doc.split("[:\\.]")) {
 			//System.out.println(sentence);
 			originalDoc.add(sentence);
-			UsageModelPanel.showDoc(sentence);
 			ArrayList<String> oneDoc = new ArrayList<String>();
 			for (String word : sentence.split("[\\-\\[,.() ; % : / \t]")) {
 				word = word.toLowerCase();

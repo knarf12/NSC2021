@@ -1,9 +1,7 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class knnAlgorithm {
 	
@@ -22,35 +20,11 @@ public class knnAlgorithm {
 	private static int K = 0;
 //	private static HashMap<Integer, ArrayList<Integer>> VtDocTr = new HashMap<Integer, ArrayList<Integer>>();
 	private static mathMethod math = new mathMethod();
-
+	static DecimalFormat df2 = new DecimalFormat("#.##");
 	public knnAlgorithm() {	
 		
 	}
-	
-//	protected static void loadTrainmodel(){
-//		BufferedReader reader;
-//		try {
-//			reader = new BufferedReader(new FileReader(
-//					"data/model/Model.txt"));
-//			String line = reader.readLine();
-//			int i = 1;
-//			while (line != null) {
-//				ArrayList<String> wordAll = new  ArrayList<String>();
-//				String name = "";
-//				for(String word : line.split(" ")) {
-//						wordAll.add(word); 
-//				}
-//				
-//				VtDocTr.put(i, wordAll);
-//				i++;
-//				line = reader.readLine();
-//			}
-//			
-//			reader.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
+
 	
 	private static Double distance(int A , int B) {
 		if ((A-B) == 0) {
@@ -64,7 +38,8 @@ public class knnAlgorithm {
 	@SuppressWarnings("unused")
 	static void checkKNN(ArrayList<Integer> VtDocTest, HashMap<Integer, ArrayList<Integer>> VtDocTr) {
 		Double[] distanceDoc = new Double[VtDocTr.size()];
-		Double[] distanceMax = new Double[VtDocTr.size()];
+		Double[] distanceMin = new Double[VtDocTr.size()];
+		Double[] distanceDocOri = new Double[VtDocTr.size()];
 		//System.out.println(VtDocTest);
 		//System.out.println(VtDocTr.size());
 		for (int j=0; j< VtDocTr.size(); j++) {
@@ -72,18 +47,18 @@ public class knnAlgorithm {
 			for (int i=0; i < VtDocTest.size(); i++) {
 				sum =sum + distance(VtDocTest.get(i),VtDocTr.get(j).get(i));
 			}
+			distanceDocOri[j]=Math.sqrt(sum);
 			distanceDoc[j]=Math.sqrt(sum);
 		}
-		distanceMax = bubbleSort(distanceDoc);
+		distanceMin = bubbleSort(distanceDoc);
 		
-		for (int i=0; i< distanceMax.length; i++) {
-			System.out.println(distanceMax[i]+"\t"+distanceDoc[i]);
-		}System.out.println();
 	}
 	
-	static void checkKNNDoc(ArrayList<Integer> VtDocTest, HashMap<Integer, ArrayList<Integer>> VtDocTr) {
+	static String checkKNNDoc(ArrayList<Integer> VtDocTest, HashMap<Integer, ArrayList<Integer>> VtDocTr) {
 		Double[] distanceDoc = new Double[VtDocTr.size()];
-		Double[] distanceMax = new Double[VtDocTr.size()];
+		Double[] distanceDocOri = new Double[VtDocTr.size()];
+		Double[] distanceMin = new Double[VtDocTr.size()];
+		
 		//System.out.println(VtDocTest);
 		//System.out.println(VtDocTr.size());
 		for (int j=0; j< VtDocTr.size(); j++) {
@@ -91,14 +66,39 @@ public class knnAlgorithm {
 			for (int i=0; i < VtDocTest.size(); i++) {
 				sum =sum + distance(VtDocTest.get(i),VtDocTr.get(j).get(i));
 			}
-			System.out.println(Math.sqrt(sum));
+			//System.out.println(Math.sqrt(sum));
 			distanceDoc[j]=Math.sqrt(sum);
+			distanceDocOri[j]=Math.sqrt(sum);
 		}//System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-		distanceMax = bubbleSort(distanceDoc);
+
+		distanceMin = bubbleSort(distanceDoc);
 		
-//		for (int i=0; i< distanceMax.length; i++) {
-//			System.out.println(distanceMax[i]+"\t"+distanceDoc[i]);
+//		for (int i=0; i< distanceMin.length; i++) {
+//			System.out.println(df2.format(distanceMin[i])+"\t"+df2.format(distanceDocOri[i]));
 //		}System.out.println();
+		
+		//System.out.println(distanceDocOri.length);
+		
+		int s=0,d=0,r=0;
+		for (int i=0; i< 9; i++) {
+			for (int j = 0; j < distanceDocOri.length; j++) {
+				if(distanceMin[i].equals(distanceDocOri[j])  && j < 10) {
+					d+=1;
+				}else if(distanceMin[i].equals(distanceDocOri[j])  && j < 20) {
+					r+=1;
+				}else if(distanceMin[i].equals(distanceDocOri[j])  && j < 30){
+					s+=1;
+				}
+			}
+		}
+		
+		if(s>=d && s>=r) {
+			return "symptom" ;
+		}else if(d>=s && d>=r) {
+			return "diagnosis" ;
+		}else{
+			return "reflection" ;
+		}
 	}
 	
 	static Double[] bubbleSort(Double[] arr) 
