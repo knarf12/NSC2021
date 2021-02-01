@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class handlerAction implements ActionListener{
 	public String choice = "" ; 
 	private String weight= "";
-	private String algorithm= "";
+	public static String algorithm= "";
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -41,7 +41,14 @@ public class handlerAction implements ActionListener{
 			TrainModelPanel.clearTextArea();
 			
 			if(algorithm.equalsIgnoreCase("BM25+")) {
-				getDocSymptom(midProcess.evaluaBM25, 0.8);
+				if (midProcess.evaluaBM25.size()<= 50) {
+					getDocDiagnosis(midProcess.evaluaBM25, 85.0d);
+				}else if (midProcess.evaluaBM25.size()<= 220) {
+					getDocDiagnosis(midProcess.evaluaBM25, 140.0d);
+				}else {
+					getDocDiagnosis(midProcess.evaluaBM25, 160.0d);
+				}
+				
 			}else if (algorithm.equalsIgnoreCase("Cosine")) {
 				//System.out.println("Cosine");
 				getDocSymptom(midProcess.evaluaCosine,0.1);
@@ -60,7 +67,15 @@ public class handlerAction implements ActionListener{
 			TrainModelPanel.clearTextArea();
 			
 			if(algorithm.equalsIgnoreCase("BM25+")) {
-				getDocDiagnosis(midProcess.evaluaBM25, 0.8);
+				if (midProcess.evaluaBM25.size()<= 50) {
+					getDocDiagnosis(midProcess.evaluaBM25, 85.0d);
+				}else if (midProcess.evaluaBM25.size()<= 220) {
+					getDocDiagnosis(midProcess.evaluaBM25, 140.0d);
+				}else {
+					getDocDiagnosis(midProcess.evaluaBM25, 160.0d);
+				}
+				
+				
 			}else if (algorithm.equalsIgnoreCase("Cosine")) {
 				//System.out.println("Cosine");
 				getDocDiagnosis(midProcess.evaluaCosine, 0.1);
@@ -77,7 +92,14 @@ public class handlerAction implements ActionListener{
 		}else if(e.getActionCommand().equalsIgnoreCase("Reflection")) {
 			TrainModelPanel.clearTextArea();
 			if(algorithm.equalsIgnoreCase("BM25+")) {
-				getDocReflection(midProcess.evaluaBM25, 0.8);
+				if (midProcess.evaluaBM25.size()<= 50) {
+					getDocDiagnosis(midProcess.evaluaBM25, 85.0d);
+				}else if (midProcess.evaluaBM25.size()<= 220) {
+					getDocDiagnosis(midProcess.evaluaBM25, 140.0d);
+				}else {
+					getDocDiagnosis(midProcess.evaluaBM25, 160.0d);
+				}
+				
 			}else if (algorithm.equalsIgnoreCase("Cosine")) {
 //				System.out.println("Cosine");
 				getDocReflection(midProcess.evaluaCosine, 0.1);
@@ -134,6 +156,11 @@ public class handlerAction implements ActionListener{
 			if(k>=5) {
 				s+=1;
 				TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i-1));
+				if(rate <= 1 ) {
+					midProcess.writeXML("./ClassifierDocFile/Cosine/",midProcess.nameDoc.get(i-1),midProcess.DocsTest.get(i-1),"reflection");
+				}else{
+					midProcess.writeXML("./ClassifierDocFile/BM25/",midProcess.nameDoc.get(i-1),midProcess.DocsTest.get(i-1),"reflection");
+				}
 			}
 		}
 		TrainModelPanel.setText(""+s);
@@ -154,6 +181,11 @@ public class handlerAction implements ActionListener{
 			if(k>=5) {
 				s+=1;
 				TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i-1));
+				if(rate <= 1 ) {
+					midProcess.writeXML("./ClassifierDocFile/Cosine/",midProcess.nameDoc.get(i-1),midProcess.DocsTest.get(i-1),"diagnosis");
+				}else{
+					midProcess.writeXML("./ClassifierDocFile/BM25/",midProcess.nameDoc.get(i-1),midProcess.DocsTest.get(i-1),"diagnosis");
+				}
 			}
 		}
 		TrainModelPanel.setText(""+s);
@@ -174,6 +206,11 @@ public class handlerAction implements ActionListener{
 			if(k>=5) {
 				s+=1;
 				TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i-1));
+				if(rate <= 1 ) {
+					midProcess.writeXML("./ClassifierDocFile/Cosine/",midProcess.nameDoc.get(i-1),midProcess.DocsTest.get(i-1),"symptom");
+				}else{
+					midProcess.writeXML("./ClassifierDocFile/BM25/",midProcess.nameDoc.get(i-1),midProcess.DocsTest.get(i-1),"symptom");
+				}
 			}
 		}
 		TrainModelPanel.setText(""+s);
@@ -181,14 +218,18 @@ public class handlerAction implements ActionListener{
 	
 	private void getDocAll(HashMap<Integer, ArrayList<Double>> evalua,String name) {
 		Double r1 =0.0d ;
-		Double r2 =0.0d;
-		Double r3 =0.0d;
 		if(algorithm.equalsIgnoreCase("BM25+")) {
-			r1 = 0.8; r2 = 0.8; r3=0.8;
-		}else if (algorithm.equalsIgnoreCase("Cosine")) {
-			r1=0.1; r2=0.1; r3=0.1;
-		}else if (algorithm.equalsIgnoreCase("NV")) {
+			if (midProcess.evaluaBM25.size()<= 50) {
+				r1 = 85.0d;
+				
+			}else if (midProcess.evaluaBM25.size()<= 220) {
+				r1 = 140.0d;
+			}else {
+				r1 = 160.0d; 
+			}
 			
+		}else if (algorithm.equalsIgnoreCase("Cosine")) {
+			r1=0.1;
 		}
 		if(r1>0) {
 			int s=0;
@@ -200,9 +241,9 @@ public class handlerAction implements ActionListener{
 					
 					if (evalua.get(i).get(j) >= r1 && j<10) {
 						k++;
-					}else if (evalua.get(i).get(j) >= r2 && j<20) {
+					}else if (evalua.get(i).get(j) >= r1 && j<20) {
 						k2++;
-					}else if(evalua.get(i).get(j) >= r3 ){
+					}else if(evalua.get(i).get(j) >= r1 ){
 						k3++;
 					}
 				}

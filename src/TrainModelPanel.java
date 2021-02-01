@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
+import javax.swing.JTabbedPane;
 
 public class TrainModelPanel extends JPanel implements ActionListener{
 	
@@ -145,12 +147,12 @@ public class TrainModelPanel extends JPanel implements ActionListener{
 		add(lblNewLabel_2);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(306, 465, 680, 155);
+		//scrollPane_2.setBounds(443, 465, 680, 155);
 		
 		textArea_1 = new JTextArea();
-		textArea_1.setFont(new Font("Consolas", Font.PLAIN, 13));
+		textArea_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		scrollPane_2.setViewportView(textArea_1);
-		add(scrollPane_2);
+		//add(scrollPane_2);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
@@ -163,7 +165,7 @@ public class TrainModelPanel extends JPanel implements ActionListener{
 		blackline = BorderFactory.createLineBorder(Color.black);
 		Context = BorderFactory.createTitledBorder(
                 blackline, "Types of Documents" );
-		Context.setTitleFont(new Font("Consolas", Font.PLAIN, 14));
+		Context.setTitleFont(new Font("Tahoma", Font.PLAIN, 12));
 		Context.setTitleJustification(TitledBorder.CENTER);
 		panel_1.setBorder(Context);
 		add(panel_1);
@@ -231,7 +233,7 @@ public class TrainModelPanel extends JPanel implements ActionListener{
 		
 		Technique = BorderFactory.createTitledBorder(
                 blackline, "Selection Technique");
-		Technique.setTitleFont(new Font("Consolas", Font.PLAIN, 14));
+		Technique.setTitleFont(new Font("Tahoma", Font.PLAIN, 12));
 		Technique.setTitleJustification(TitledBorder.CENTER);
 		panel_1_1.setBorder(Technique);
 		
@@ -272,10 +274,11 @@ public class TrainModelPanel extends JPanel implements ActionListener{
 		textArea.setFont(new Font("Consolas", Font.PLAIN, 13));
 		textArea.setEditable(false);
 		textArea_1.setEditable(false);
+		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(306, 297, 680, 139);
+		//scrollPane_1.setBounds(410, 295, 680, 139);
 		scrollPane_1.setViewportView(textArea);
-		add(scrollPane_1);
+		//add(scrollPane_1);
 		
 		JLabel lblNewLabel_3 = new JLabel("Total :");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -300,6 +303,25 @@ public class TrainModelPanel extends JPanel implements ActionListener{
 		tfload.setEditable(false);
 		tfload.setBounds(690, 439, 70, 23);
 		add(tfload);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(306, 290, 680, 141);
+		add(tabbedPane);
+		
+		JPanel panel = new JPanel(false);
+	    panel.setLayout(new GridLayout(1, 1));
+	    tabbedPane.addTab("Documents Loaded", null ,panel);
+	    panel.add(scrollPane_1);
+	    
+	    JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
+	    tabbedPane_1.setBounds(306, 454, 680, 166);
+	    add(tabbedPane_1);
+	    
+	    JPanel panel2 = new JPanel(false);
+	    panel2.setLayout(new GridLayout(1, 1));
+	    panel2.add(scrollPane_2);
+	    
+	    tabbedPane_1.addTab("Documents Selected", null , panel2);
 	}
 
 	@Override
@@ -313,7 +335,7 @@ public class TrainModelPanel extends JPanel implements ActionListener{
 	
 		if(obj.equals(btnProcess)) {
 			//System.out.println("Click Process... 1");
-			if (h.choice.equalsIgnoreCase("local") && txtSearch.getText().length() > 10) {
+			if (h.choice.equalsIgnoreCase("local") && txtSearch.getText().length() > 10 && handlerAction.algorithm.length() >= 2) {
 				//System.out.println("local");
 				try {
 					 process=new midProcess(txtSearch.getText());
@@ -334,7 +356,7 @@ public class TrainModelPanel extends JPanel implements ActionListener{
 		if(obj.equals(btnSearch)) {
 			if (h.choice.equalsIgnoreCase("Pubmed")) {
 				//System.out.println("Pubmed");
-				if(txtSearch.getText().length()>2 && txtRetmax.getText().length() >= 1) {
+				if(txtSearch.getText().length()>2 && txtRetmax.getText().length() >= 1 && handlerAction.algorithm.length() >= 2) {
 					try {
 						WebClawer WebClawer = new WebClawer(txtSearch.getText(),Integer.parseInt(txtRetmax.getText()));
 					} catch (NumberFormatException | IOException | InterruptedException | ParserConfigurationException

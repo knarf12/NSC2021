@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -29,7 +30,7 @@ public class midProcess {
 	private static List<String> stopword;
 	public static ArrayList<String> nameDoc = new ArrayList<String>();
 	//public static ArrayList<String> abtDoc = new ArrayList<String>();
-	private static ArrayList<String> DocsTest = new ArrayList<String>();
+	static ArrayList<String> DocsTest = new ArrayList<String>();
 	private static HashMap<Integer, ArrayList<String>> DocTr = new HashMap<Integer, ArrayList<String>>();
 	private static HashMap<Integer, ArrayList<String>> Doclist = new HashMap<Integer, ArrayList<String>>();
 	private static HashMap<Integer, ArrayList<Integer>> VtDoclist = new HashMap<Integer, ArrayList<Integer>>();
@@ -46,7 +47,6 @@ public class midProcess {
 	private static mathMethod mathMethod = new mathMethod();
 	private static bm25F bm25f = new bm25F();
 	private static knnAlgorithm knn = new knnAlgorithm();
-	private static Model md = new Model();
 	static int kk=0;
 	
 	
@@ -145,23 +145,7 @@ public class midProcess {
 				}
 			}
 			evaluaCosine.put(j, similar);
-			if(d>=5) {
-				writeXML("./ClassifierDocFile/Cosine/",nameDoc.get(j-1),DocsTest.get(j-1),"diagnosis");
-			}else if(r>=5) {
-				writeXML("./ClassifierDocFile/Cosine/",nameDoc.get(j-1),DocsTest.get(j-1),"reflection");
-			}else if(s>=5){
-				writeXML("./ClassifierDocFile/Cosine/",nameDoc.get(j-1),DocsTest.get(j-1),"symptom");
-			}
 		}
-		
-//		for (int j = 0; j < VtDocTr.size(); j++) {
-//			ArrayList<Double> similar = new ArrayList<Double>();
-//			for (int j2 = 0; j2 < VtDocTr.size(); j2++) {
-//				similar.add(mathMethod.CosineSim(VtDocTr.get(j2), VtDocTr.get(j)));
-////					System.out.println(j2);
-//			}
-//			evaluaSSCosine.put(j, similar);
-//		}
 		
 		//bm25+
 		ArrayList<Double> weigtingIDF = new ArrayList<Double>();
@@ -169,6 +153,7 @@ public class midProcess {
 		bm25F.DocAVG(VtDoclist);
 		//System.out.println(weigtingIDF);
 		for (int j = 1; j <= VtDoclist.size(); j++) {
+			
 			ArrayList<Double> similar = new ArrayList<Double>();
 			for (int j2 = 0; j2 < VtDocTr.size(); j2++) {
 				similar.add(bm25F.BM25Plus(VtDocTr.get(j2), VtDoclist.get(j), weigtingIDF));

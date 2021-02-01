@@ -12,6 +12,7 @@ public class bm25F {
 		
 	}
 	
+	
 	public static Double BM25Plus(ArrayList<Integer> VtDocTr,ArrayList<Integer> VtDocTest, ArrayList<Double> weigtingIDF) {
 		// TODO Auto-generated constructor stub
 		int index = 0;
@@ -25,7 +26,8 @@ public class bm25F {
 			}
 		}
 		//System.out.println(result);
-		return result/(170);
+		
+		return result;
 	}
 	
 	public static Double BM25PlusST(ArrayList<Integer> VtDocTr,ArrayList<Integer> VtDocTest, ArrayList<Double> weigtingIDF) {

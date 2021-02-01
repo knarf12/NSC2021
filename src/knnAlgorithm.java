@@ -18,7 +18,6 @@ public class knnAlgorithm {
 	 */
 	
 	private static int K = 0;
-//	private static HashMap<Integer, ArrayList<Integer>> VtDocTr = new HashMap<Integer, ArrayList<Integer>>();
 	private static mathMethod math = new mathMethod();
 	static DecimalFormat df2 = new DecimalFormat("#.##");
 	public knnAlgorithm() {	
@@ -36,7 +35,7 @@ public class knnAlgorithm {
 	}
 	
 	@SuppressWarnings("unused")
-	static void checkKNN(ArrayList<Integer> VtDocTest, HashMap<Integer, ArrayList<Integer>> VtDocTr) {
+	static Double checkKNN(ArrayList<Integer> VtDocTest, HashMap<Integer, ArrayList<Integer>> VtDocTr) {
 		Double[] distanceDoc = new Double[VtDocTr.size()];
 		Double[] distanceMin = new Double[VtDocTr.size()];
 		Double[] distanceDocOri = new Double[VtDocTr.size()];
@@ -51,6 +50,9 @@ public class knnAlgorithm {
 			distanceDoc[j]=Math.sqrt(sum);
 		}
 		distanceMin = bubbleSort(distanceDoc);
+//		System.out.println(distanceMin[0]);
+		
+		return distanceMin[0];
 		
 	}
 	
@@ -59,25 +61,16 @@ public class knnAlgorithm {
 		Double[] distanceDocOri = new Double[VtDocTr.size()];
 		Double[] distanceMin = new Double[VtDocTr.size()];
 		
-		//System.out.println(VtDocTest);
-		//System.out.println(VtDocTr.size());
 		for (int j=0; j< VtDocTr.size(); j++) {
 			Double sum = 0.0d;
 			for (int i=0; i < VtDocTest.size(); i++) {
 				sum =sum + distance(VtDocTest.get(i),VtDocTr.get(j).get(i));
 			}
-			//System.out.println(Math.sqrt(sum));
 			distanceDoc[j]=Math.sqrt(sum);
 			distanceDocOri[j]=Math.sqrt(sum);
-		}//System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+		}
 
 		distanceMin = bubbleSort(distanceDoc);
-		
-//		for (int i=0; i< distanceMin.length; i++) {
-//			System.out.println(df2.format(distanceMin[i])+"\t"+df2.format(distanceDocOri[i]));
-//		}System.out.println();
-		
-		//System.out.println(distanceDocOri.length);
 		
 		int s=0,d=0,r=0;
 		for (int i=0; i< 9; i++) {

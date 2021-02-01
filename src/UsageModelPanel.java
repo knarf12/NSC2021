@@ -1,10 +1,9 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -12,21 +11,19 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 
 public class UsageModelPanel extends JPanel implements ActionListener{
 	
 	MyGUI app;
 	Image bg;
-	
+	static boolean CheckprocessSG = false;
+	static boolean CheckprocessML = false;
 	JButton btnProcess;
 	JButton btnBack;
 	static JTextField txtSearch;
@@ -59,16 +56,6 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 		btnProcess.setContentAreaFilled(false);
 		btnProcess.setBorderPainted(false);
 		btnProcess.addActionListener(this);
-		
-		JLabel lblNewLabel_1 = new JLabel("Knowledge Extraction");
-		lblNewLabel_1.setFont(new Font("Consolas", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(333, 300, 188, 14);
-		add(lblNewLabel_1);
-		
-		JLabel lblNewLabel = new JLabel("Original Documents");
-		lblNewLabel.setFont(new Font("Consolas", Font.PLAIN, 14));
-		lblNewLabel.setBounds(54, 300, 153, 14);
-		add(lblNewLabel);
 		add(btnProcess);
 		
 		Icon iconBack = new ImageIcon(getClass().getResource("btn_back_usege.png"));
@@ -155,27 +142,39 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 		rdNaive.addActionListener(hsentence);
 		add(rdNaive);
 		
-		JRadioButton rdDeep = new JRadioButton("Deep learning");
-		rdDeep.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdDeep.setBounds(737, 231, 109, 23);
-		rdDeep.addActionListener(hsentence);
-		add(rdDeep);
-		
 		bgTec.add(rdBM25);
-		bgTec.add(rdDeep);
 		bgTec.add(rdNaive);
 		bgTec.add(rdCosine);
 		bgTec.add(rdKnn);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(54, 320, 224, 375);
 		scrollPane.setViewportView(textArea);
-		add(scrollPane);
+		
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(333, 320, 513, 375);
 		scrollPane_1.setViewportView(textArea_1);
-		add(scrollPane_1);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setFont(new Font("Consolas", Font.PLAIN, 12));
+		tabbedPane.setBounds(333, 290, 513, 400);
+		add(tabbedPane);
+		
+		JPanel panel = new JPanel(false);
+	    panel.setLayout(new GridLayout(1, 1));
+	    
+	    tabbedPane.addTab("Knowledge Extraction", null ,panel);
+	    panel.add(scrollPane_1);
+	    
+	    JPanel panel1 = new JPanel(false);
+	    panel1.setLayout(new GridLayout(1, 1));
+	    panel1.add(scrollPane);
+	    
+	    JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
+	    tabbedPane_1.setBounds(54, 290, 224, 400);
+	    add(tabbedPane_1);
+	    
+	    tabbedPane_1.addTab("Original Documents", null ,panel1);
+	    
 	}
 
 	@Override
@@ -188,17 +187,16 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 		
 		if(obj.equals(btnProcess)) {
 			//System.out.println("Click Process... 2");
-			if(hsentence.docchoice.equalsIgnoreCase("singleDoc") && selected) {
-				System.out.println("siggle true");
-				try {
-					ClassifierSentence classifierSentence = new ClassifierSentence(txtSearch.getText());
-				} catch (SAXException | IOException | ParserConfigurationException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+			if(hsentence.docchoice.equalsIgnoreCase("singleDoc") && selected ) {
+				//System.out.println("siggle true");
+				ClassifierSentence.processSingle(txtSearch.getText());
+				CheckprocessSG = true;
+				CheckprocessML = false;
 				
-			}else if(hsentence.docchoice.equalsIgnoreCase("mutiDoc") && selected) {
+			}else if(hsentence.docchoice.equalsIgnoreCase("mutiDoc") && selected ) {
 				System.out.println("muti true");
+				CheckprocessSG = false;
+				CheckprocessML = true;
 			}
 		}
 		if(obj.equals(btnSearch)) {
@@ -206,7 +204,6 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 			if(hsentence.docchoice.equalsIgnoreCase("singleDoc")) {
 				
 				fileChooser.setCurrentDirectory(new java.io.File("."));
-				//fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				fileChooser.setAcceptAllFileFilterUsed(false);
 				if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 				      txtSearch.replaceSelection(""+ fileChooser.getSelectedFile());
@@ -231,7 +228,6 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 	}
 	
 	protected static void setSearch() {
-		// TODO Auto-generated method stub
 		txtSearch.setText("");
 	}
 	
@@ -252,12 +248,10 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 	}
 	
 	public static void showDoc(String Doc) {
-		// TODO Auto-generated method stub
 		textArea.append(Doc+"\n");
 	}
 	
 	public static void showSentence(String Doc) {
-		// TODO Auto-generated method stub
 		textArea_1.append(Doc+"\n");
 	}
 }
