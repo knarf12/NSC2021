@@ -132,7 +132,7 @@ public class ClassifierSentence {
 	protected static void getSTKNN() {
 		try {
 			for (int i = 0; i < evaluaKNN.size(); i++) {
-				System.out.println(i+" "+originalDoc.get(i) +" \n"+ evaluaKNN.get(i));
+				//System.out.println(i+" "+originalDoc.get(i) +" \n"+ evaluaKNN.get(i));
 				if (evaluaKNN.get(i)<3.2) {
 					if(originalDoc.get(i).length() > 17 ) {
 						UsageModelPanel.showSentence(" "+originalDoc.get(i)+".");
@@ -175,7 +175,8 @@ public class ClassifierSentence {
 			for (int i = 0; i < evaluaNVB.size(); i++) {
 				String str =  evaluaNVB.get(i).toString();
 				String []spl =  str.split("\\.");
-				if (Integer.parseInt(spl[0]) > 7) {
+				System.out.println(spl[0]);
+				if (Integer.parseInt(spl[0]) > 4) {
 					//System.out.println(originalDoc.get(i));
 					if(originalDoc.get(i).length() > 17 ) {
 						UsageModelPanel.showSentence(" "+originalDoc.get(i)+".");
@@ -192,11 +193,14 @@ public class ClassifierSentence {
 		try {
 			for (int i = 0; i < evaluaBM25.size(); i++) {
 				int d=0;
+				
 				for (int j = 0; j < evaluaBM25.get(1).size(); j++) {
-					if(evaluaBM25.get(i).get(j)> 22.5) {
+					//System.out.println(evaluaBM25.get(i).get(j));
+					if(evaluaBM25.get(i).get(j)> 12.5) {
 						d=1;
 					}
 				}
+				//System.out.println();
 				if(d==1 && i> 1) {
 					if(originalDoc.get(i).length() > 17 ) {
 						UsageModelPanel.showSentence(" "+originalDoc.get(i)+".");

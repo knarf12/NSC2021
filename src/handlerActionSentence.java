@@ -40,7 +40,7 @@ public class handlerActionSentence implements ActionListener{
 				}else if (ClassifierSentence.type.equalsIgnoreCase("symptom")) {
 					UsageModelPanel.showSentence("SYMPTOM : - ");
 					ClassifierSentence.getSTBM25();
-					UsageModelPanel.showSentence("TREATMENT MODALITY : -\n");
+					UsageModelPanel.showSentence("\nTREATMENT MODALITY : -\n");
 					UsageModelPanel.showSentence("\nREFLECTION/INFLECTION : -");
 				}
 				
@@ -84,13 +84,13 @@ public class handlerActionSentence implements ActionListener{
 					UsageModelPanel.showSentence("\nREFLECTION/INFLECTION : -");
 				}else if (ClassifierSentence.type.equalsIgnoreCase("reflection")) {
 					UsageModelPanel.showSentence("SYMPTOM : - \n");
-					UsageModelPanel.showSentence("TREATMENT MODALITY : -\n");
+					UsageModelPanel.showSentence("\nTREATMENT MODALITY : -\n");
 					UsageModelPanel.showSentence("REFLECTION/INFLECTION : ");
 					ClassifierSentence.getSTKNN();
 				}else if (ClassifierSentence.type.equalsIgnoreCase("symptom")) {
 					UsageModelPanel.showSentence("SYMPTOM : - ");
 					ClassifierSentence.getSTKNN();
-					UsageModelPanel.showSentence("TREATMENT MODALITY : -\n");
+					UsageModelPanel.showSentence("\nTREATMENT MODALITY : -\n");
 					UsageModelPanel.showSentence("\nREFLECTION/INFLECTION : -");
 				}
 				

@@ -42,9 +42,9 @@ public class handlerAction implements ActionListener{
 			
 			if(algorithm.equalsIgnoreCase("BM25+")) {
 				if (midProcess.evaluaBM25.size()<= 50) {
-					getDocSymptom(midProcess.evaluaBM25, 85.0d);
+					getDocSymptom(midProcess.evaluaBM25, 70.0d);
 				}else if (midProcess.evaluaBM25.size()<= 220) {
-					getDocSymptom(midProcess.evaluaBM25, 140.0d);
+					getDocSymptom(midProcess.evaluaBM25, 130.0d);
 				}else {
 					getDocSymptom(midProcess.evaluaBM25, 160.0d);
 				}
@@ -68,9 +68,9 @@ public class handlerAction implements ActionListener{
 			
 			if(algorithm.equalsIgnoreCase("BM25+")) {
 				if (midProcess.evaluaBM25.size()<= 50) {
-					getDocDiagnosis(midProcess.evaluaBM25, 85.0d);
+					getDocDiagnosis(midProcess.evaluaBM25, 70.0d);
 				}else if (midProcess.evaluaBM25.size()<= 220) {
-					getDocDiagnosis(midProcess.evaluaBM25, 140.0d);
+					getDocDiagnosis(midProcess.evaluaBM25, 130.0d);
 				}else {
 					getDocDiagnosis(midProcess.evaluaBM25, 160.0d);
 				}
@@ -93,9 +93,9 @@ public class handlerAction implements ActionListener{
 			TrainModelPanel.clearTextArea();
 			if(algorithm.equalsIgnoreCase("BM25+")) {
 				if (midProcess.evaluaBM25.size()<= 50) {
-					getDocReflection(midProcess.evaluaBM25, 85.0d);
+					getDocReflection(midProcess.evaluaBM25, 70.0d);
 				}else if (midProcess.evaluaBM25.size()<= 220) {
-					getDocReflection(midProcess.evaluaBM25, 140.0d);
+					getDocReflection(midProcess.evaluaBM25, 130.0d);
 				}else {
 					getDocReflection(midProcess.evaluaBM25, 160.0d);
 				}
@@ -223,10 +223,10 @@ public class handlerAction implements ActionListener{
 		Double r1 =0.0d ;
 		if(algorithm.equalsIgnoreCase("BM25+")) {
 			if (midProcess.evaluaBM25.size()<= 50) {
-				r1 = 85.0d;
-				System.out.println(r1);
+				r1 = 70.0d;
+				//System.out.println(r1);
 			}else if (midProcess.evaluaBM25.size()<= 220) {
-				r1 = 140.0d;
+				r1 = 130.0d;
 			}else {
 				r1 = 160.0d; 
 			}

@@ -23,58 +23,112 @@ public class ClassifierMulti {
 	private static List<String> stopword;
 	
 	//original sentence
-	private static ArrayList<String> originalsympST = new ArrayList<String>();
-	private static ArrayList<String> originaldiagST = new ArrayList<String>();
-	private static ArrayList<String> originalreflecST = new ArrayList<String>();
+	private static ArrayList<String> originalsympST;
+	private static ArrayList<String> originaldiagST;
+	private static ArrayList<String> originalreflecST;
 	
 	//link doc
-	static ArrayList<String> nameDoc = new ArrayList<String>();
+	static ArrayList<String> nameDoc;
 	//sentence doc train
-	private static HashMap<Integer, ArrayList<String>> reflecType = new HashMap<Integer, ArrayList<String>>();
-	private static HashMap<Integer, ArrayList<String>> diagType = new HashMap<Integer, ArrayList<String>>();
-	private static HashMap<Integer, ArrayList<String>> sympType = new HashMap<Integer, ArrayList<String>>();
+	private static HashMap<Integer, ArrayList<String>> reflecType ;
+	private static HashMap<Integer, ArrayList<String>> diagType ;
+	private static HashMap<Integer, ArrayList<String>> sympType ;
 	
 	//sentence doc test
-	private static HashMap<Integer, ArrayList<String>> sympST = new HashMap<Integer, ArrayList<String>>();
-	private static HashMap<Integer, ArrayList<String>> diagST = new HashMap<Integer, ArrayList<String>>();
-	private static HashMap<Integer, ArrayList<String>> reflecST = new HashMap<Integer, ArrayList<String>>();
+	private static HashMap<Integer, ArrayList<String>> sympST ;
+	private static HashMap<Integer, ArrayList<String>> diagST ;
+	private static HashMap<Integer, ArrayList<String>> reflecST ;
 	
 	//vector train and test
-	private static HashMap<Integer, ArrayList<Integer>> Vt_sympST = new HashMap<Integer, ArrayList<Integer>>();
-	private static HashMap<Integer, ArrayList<Integer>> Vt_diagST = new HashMap<Integer, ArrayList<Integer>>();
-	private static HashMap<Integer, ArrayList<Integer>> Vt_reflecST = new HashMap<Integer, ArrayList<Integer>>();
+	private static HashMap<Integer, ArrayList<Integer>> Vt_sympST ;
+	private static HashMap<Integer, ArrayList<Integer>> Vt_diagST ;
+	private static HashMap<Integer, ArrayList<Integer>> Vt_reflecST ;
 	
-	private static HashMap<Integer, ArrayList<Integer>> VtTr_sympST = new HashMap<Integer, ArrayList<Integer>>();
-	private static HashMap<Integer, ArrayList<Integer>> VtTr_diagST = new HashMap<Integer, ArrayList<Integer>>();
-	private static HashMap<Integer, ArrayList<Integer>> VtTr_reflecST = new HashMap<Integer, ArrayList<Integer>>();
+	private static HashMap<Integer, ArrayList<Integer>> VtTr_sympST ;
+	private static HashMap<Integer, ArrayList<Integer>> VtTr_diagST ;
+	private static HashMap<Integer, ArrayList<Integer>> VtTr_reflecST ;
 	
 	//doc test all
-	private static ArrayList<String> sympDoc = new ArrayList<String>();
-	private static ArrayList<String> diagDoc = new ArrayList<String>();
-	private static ArrayList<String> reflecDoc = new ArrayList<String>();
+	private static ArrayList<String> sympDoc;
+	private static ArrayList<String> diagDoc;
+	private static ArrayList<String> reflecDoc;
 	
 	//word all 
-	private static ArrayList<String> wordListsymp = new ArrayList<String>();
-	private static ArrayList<String> wordListdiag = new ArrayList<String>();
-	private static ArrayList<String> wordListreflec = new ArrayList<String>();
+	private static ArrayList<String> wordListsymp;
+	private static ArrayList<String> wordListdiag;
+	private static ArrayList<String> wordListreflec;
 	
-	static HashMap<Integer, ArrayList<Double>> evaluaCosinesymp = new HashMap<Integer, ArrayList<Double>>();
-	static HashMap<Integer, ArrayList<Double>> evaluaBM25symp = new HashMap<Integer, ArrayList<Double>>();
-	static ArrayList<Double> evaluaKNNsymp = new ArrayList<>();
-	static ArrayList<Double> evaluaNVBsymp = new ArrayList<>();
+	static HashMap<Integer, ArrayList<Double>> evaluaCosinesymp;
+	static HashMap<Integer, ArrayList<Double>> evaluaBM25symp;
+	static ArrayList<Double> evaluaKNNsymp;
+	static ArrayList<Double> evaluaNVBsymp;
 	
-	static HashMap<Integer, ArrayList<Double>> evaluaCosinediag = new HashMap<Integer, ArrayList<Double>>();
-	static HashMap<Integer, ArrayList<Double>> evaluaBM25diag = new HashMap<Integer, ArrayList<Double>>();
-	static ArrayList<Double> evaluaKNNdiag = new ArrayList<>();
-	static ArrayList<Double> evaluaNVBdiag = new ArrayList<>();
+	static HashMap<Integer, ArrayList<Double>> evaluaCosinediag;
+	static HashMap<Integer, ArrayList<Double>> evaluaBM25diag;
+	static ArrayList<Double> evaluaKNNdiag;
+	static ArrayList<Double> evaluaNVBdiag;
 	
-	static HashMap<Integer, ArrayList<Double>> evaluaCosinereflec = new HashMap<Integer, ArrayList<Double>>();
-	static HashMap<Integer, ArrayList<Double>> evaluaBM25reflec = new HashMap<Integer, ArrayList<Double>>();
-	static ArrayList<Double> evaluaKNNreflec = new ArrayList<>();
-	static ArrayList<Double> evaluaNVBreflec = new ArrayList<>();
+	static HashMap<Integer, ArrayList<Double>> evaluaCosinereflec;
+	static HashMap<Integer, ArrayList<Double>> evaluaBM25reflec;
+	static ArrayList<Double> evaluaKNNreflec;
+	static ArrayList<Double> evaluaNVBreflec;
 	
 	
 	protected static void processMulti(String path) throws ParserConfigurationException, SAXException, IOException {
+		
+		originalsympST = new ArrayList<String>();
+		originaldiagST = new ArrayList<String>();
+		originalreflecST = new ArrayList<String>();
+		
+		//link doc
+		 nameDoc = new ArrayList<String>();
+		//sentence doc train
+		reflecType = new HashMap<Integer, ArrayList<String>>();
+		diagType = new HashMap<Integer, ArrayList<String>>();
+		sympType = new HashMap<Integer, ArrayList<String>>();
+		
+		//sentence doc test
+		sympST = new HashMap<Integer, ArrayList<String>>();
+		diagST = new HashMap<Integer, ArrayList<String>>();
+		reflecST = new HashMap<Integer, ArrayList<String>>();
+		
+		//vector train and test
+		Vt_sympST = new HashMap<Integer, ArrayList<Integer>>();
+		Vt_diagST = new HashMap<Integer, ArrayList<Integer>>();
+		Vt_reflecST = new HashMap<Integer, ArrayList<Integer>>();
+		
+		VtTr_sympST = new HashMap<Integer, ArrayList<Integer>>();
+		VtTr_diagST = new HashMap<Integer, ArrayList<Integer>>();
+		VtTr_reflecST = new HashMap<Integer, ArrayList<Integer>>();
+		
+		//doc test all
+		sympDoc = new ArrayList<String>();
+		diagDoc = new ArrayList<String>();
+		reflecDoc = new ArrayList<String>();
+		
+		//word all 
+		wordListsymp = new ArrayList<String>();
+		wordListdiag = new ArrayList<String>();
+		wordListreflec = new ArrayList<String>();
+		
+		evaluaCosinesymp = new HashMap<Integer, ArrayList<Double>>();
+		evaluaBM25symp = new HashMap<Integer, ArrayList<Double>>();
+		evaluaKNNsymp = new ArrayList<>();
+		evaluaNVBsymp = new ArrayList<>();
+		
+		evaluaCosinediag = new HashMap<Integer, ArrayList<Double>>();
+		evaluaBM25diag = new HashMap<Integer, ArrayList<Double>>();
+		evaluaKNNdiag = new ArrayList<>();
+		evaluaNVBdiag = new ArrayList<>();
+		
+		evaluaCosinereflec = new HashMap<Integer, ArrayList<Double>>();
+		evaluaBM25reflec = new HashMap<Integer, ArrayList<Double>>();
+		evaluaKNNreflec = new ArrayList<>();
+		evaluaNVBreflec = new ArrayList<>();
+		
+		
+		
+		
 		stopword = Files.readAllLines(Paths.get("./dic/stopwordAndSpc_eng.txt"));
 		loadMultiData(path);
 		loadTrainsetMuti("./data/SentenceTrain/data-Diag",diagType,wordListdiag );
@@ -147,7 +201,8 @@ public class ClassifierMulti {
 		//System.out.println("KNN");
 		UsageModelPanel.showSentence("Diagnosis :");
 		for (int i = 0; i < evaluaKNNdiag.size(); i++) {
-			if (evaluaKNNdiag.get(i)<=4) {
+			//System.out.println(evaluaKNNdiag.get(i)<3.2);
+			if (evaluaKNNdiag.get(i)<=3.2) {
 				if(originaldiagST.get(i).length() > 15 ) {
 					UsageModelPanel.showSentence(originaldiagST.get(i)+".");
 				}
@@ -156,7 +211,7 @@ public class ClassifierMulti {
 		UsageModelPanel.showSentence("\n");
 		UsageModelPanel.showSentence("Reflection :");
 		for (int i = 0; i < evaluaKNNreflec.size(); i++) {
-			if (evaluaKNNreflec.get(i)<=4) {
+			if (evaluaKNNreflec.get(i)<=3.2) {
 				if(originalreflecST.get(i).length() > 15 ) {
 					UsageModelPanel.showSentence(originalreflecST.get(i)+".");
 				}
@@ -165,7 +220,7 @@ public class ClassifierMulti {
 		UsageModelPanel.showSentence("\n");
 		UsageModelPanel.showSentence("Symptom :");
 		for (int i = 0; i < evaluaKNNsymp.size(); i++) {
-			if (evaluaKNNsymp.get(i)<=4) {
+			if (evaluaKNNsymp.get(i)<=3.2) {
 				if(originalsympST.get(i).length() > 15 ) {
 					UsageModelPanel.showSentence(originalsympST.get(i)+".");
 				}
@@ -235,36 +290,47 @@ public class ClassifierMulti {
 	protected static void getSTNVB() {
 		//System.out.println("NVB");
 		UsageModelPanel.showSentence("Diagnosis :");
-		for (int i = 0; i < evaluaNVBdiag.size(); i++) {
-			System.out.println(evaluaNVBdiag.get(i));
-			if (evaluaNVBdiag.get(i)>= 6.0d) {
-				System.out.println(originaldiagST.get(i));
-				if(originaldiagST.get(i).length() > 15 ) {
-					UsageModelPanel.showSentence(originaldiagST.get(i)+".");
+		try {
+			for (int i = 0; i < evaluaNVBdiag.size(); i++) {
+				String str =  evaluaNVBdiag.get(i).toString();
+				String []spl =  str.split("\\.");
+				if (Integer.parseInt(spl[0]) > 6) {
+					//System.out.println(originalDoc.get(i));
+					if(originaldiagST.get(i).length() > 17 ) {
+						UsageModelPanel.showSentence(" "+originaldiagST.get(i)+".");
+					}
 				}
 			}
-		}
-		UsageModelPanel.showSentence("\n");
-		UsageModelPanel.showSentence("Reflection :");
-		for (int i = 0; i < evaluaNVBreflec.size(); i++) {
-			System.out.println(evaluaNVBreflec.get(i));
-			if (evaluaNVBreflec.get(i)>= 6.0d) {
-				System.out.println(originalreflecST.get(i));
-				if(originalreflecST.get(i).length() >  15 ) {
-					UsageModelPanel.showSentence(originalreflecST.get(i)+".");
+		
+			UsageModelPanel.showSentence("\n");
+			UsageModelPanel.showSentence("Reflection :");
+			for (int i = 0; i < evaluaNVBreflec.size(); i++) {
+				String str =  evaluaNVBreflec.get(i).toString();
+				String []spl =  str.split("\\.");
+				if (Integer.parseInt(spl[0]) > 6) {
+					//System.out.println(originalDoc.get(i));
+					if(originalreflecST.get(i).length() > 17 ) {
+						UsageModelPanel.showSentence(" "+originalreflecST.get(i)+".");
+					}
 				}
 			}
-		}
-		UsageModelPanel.showSentence("\n");
-		UsageModelPanel.showSentence("Symptom :");
-		for (int i = 0; i < evaluaNVBsymp.size(); i++) {
-			System.out.println(evaluaNVBsymp.get(i));
-			if (evaluaNVBsymp.get(i)>=6.0d) {
-				System.out.println(originalsympST.get(i));
-				if(originalsympST.get(i).length() >  15 ) {
-					UsageModelPanel.showSentence(originalsympST.get(i)+".");
+			
+			UsageModelPanel.showSentence("\n");
+			UsageModelPanel.showSentence("Symptom :");
+	
+			for (int i = 0; i < evaluaNVBsymp.size(); i++) {
+				String str =  evaluaNVBsymp.get(i).toString();
+				String []spl =  str.split("\\.");
+				if (Integer.parseInt(spl[0]) > 6) {
+					//System.out.println(originalDoc.get(i));
+					if(originalsympST.get(i).length() > 17 ) {
+						UsageModelPanel.showSentence(" "+originalsympST.get(i)+".");
+					}
 				}
 			}
+		
+		} catch (IndexOutOfBoundsException e) {
+			// TODO: handle exception
 		}
 		UsageModelPanel.showSentence("\n");
 	}
@@ -278,12 +344,13 @@ public class ClassifierMulti {
 			Double sum = 0.0d;
 			int d=0;
 			for (int k = 0; k < evaluaBM25diag.get(0).size(); k++) {
-				
 				sum += sum + evaluaBM25diag.get(i).get(k);
-				if(evaluaBM25diag.get(i).get(k)>22.0d) {
+				if(evaluaBM25diag.get(i).get(k)>=32.5d) {
 					d=1;
 				}
+				//System.out.println(evaluaBM25diag.get(i).get(k));
 			}
+			//System.out.println();
 			if(d==1) {
 				//System.out.println(originalDoc.get(i));
 				if(originaldiagST.get(i).length() > 15 ) {
@@ -298,9 +365,8 @@ public class ClassifierMulti {
 			Double sum = 0.0d;
 			int d=0;
 			for (int k = 0; k < evaluaBM25reflec.get(0).size(); k++) {
-				
 				sum += sum + evaluaBM25reflec.get(i).get(k);
-				if(evaluaBM25reflec.get(i).get(k)>22.0d) {
+				if(evaluaBM25reflec.get(i).get(k)>=32.5d) {
 					d=1;
 				}
 			}
@@ -318,9 +384,8 @@ public class ClassifierMulti {
 			Double sum = 0.0d;
 			int d=0;
 			for (int k = 0; k < evaluaBM25symp.get(0).size(); k++) {
-				
 				sum += sum + evaluaBM25symp.get(i).get(k);
-				if(evaluaBM25symp.get(i).get(k)>22.0d) {
+				if(evaluaBM25symp.get(i).get(k)>=32.5d) {
 					d=1;
 				}
 			}
@@ -331,6 +396,7 @@ public class ClassifierMulti {
 				}
 			}
 		}
+		
 	}
 	
 	private static void loadMultiData(String path) throws ParserConfigurationException, SAXException, IOException {

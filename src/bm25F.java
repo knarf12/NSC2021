@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class bm25F {
-	private final static Double k_1 = 1.0d;
+	private final static Double k_1 = 1.75d;
 	private final static Double b = 0.5d;
 	private final static Double delta = 1.0d;
 	private static Double doc_avd = 0.0d;
@@ -20,9 +20,11 @@ public class bm25F {
 			if(VtDocTr.get(i)>0 ) {
 				
 				result += weigtingIDF.get(index) * (((VtDocTest.get(i)*(k_1+1)/(VtDocTest.get(i)+k_1*(1-b+b*(wordCount(VtDocTest)/doc_avd))))+delta));
-				index +=1;
+				
 			}
+			index +=1;
 		}
+		//System.out.println(result);
 		return result;
 	}
 	
@@ -30,19 +32,17 @@ public class bm25F {
 		// TODO Auto-generated constructor stub
 		int index = 0;
 		Double result = 0.0d;
-		for (int i = 0; i < VtDocTest.size(); i++) {
+		for (int i = 0; i < VtDocTr.size(); i++) {
 			if(VtDocTr.get(i)>0) {
 				result += weigtingIDF.get(index) * (((VtDocTest.get(i)*(k_1+1))/(VtDocTest.get(i)+k_1*(1-b+b*(wordCount(VtDocTest)/doc_avd))))+delta);
-				index +=1;
 			}
+			index +=1;
 		}
 		return result;
 	}
 	
 	public static ArrayList<Double> getAll(HashMap<Integer, ArrayList<Integer>> Doc) {
-		
 		Double docCount =(double)Doc.size();
-		//System.out.println(Doc.get(1).size());
 		ArrayList<Double> weigtingIDF = new ArrayList<Double>();
 		for (int j = 0; j < Doc.get(1).size(); j++) {
 			int count = 0;
