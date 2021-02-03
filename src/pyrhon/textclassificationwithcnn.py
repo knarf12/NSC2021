@@ -17,6 +17,21 @@ for child in root:
             if i.text.lower() == 'symptom':
                 y.append(2)
 
+tree = ET.parse('../../data/dataTest/data_test_1.xml') # ระบุ pathfile
+root = tree.getroot()
+for child in root:
+    for i in child:
+        if i.tag == 'Abstract':  # เอาเฉพาะ ข้อมูลที่อยู่ใน tag Abstract
+            data.append(i.text)
+        if i.tag == 'Class':
+            if i.text.lower() == 'diagnosis':
+                y.append(0)
+            if i.text.lower() == 'reflection':
+                y.append(1)
+            if i.text.lower() == 'symptom':
+                y.append(2)
+                
+
 # ฟังก์ชัน ทำ feature 
 from textblob import TextBlob
 from textblob import Blobber
@@ -107,6 +122,8 @@ for tokens in feature:
 print(X)  #คือ Data
 print(y)  #คือ Label
 
+
+#### มาแก้ข้อมูล train 30, test  ??
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
 

@@ -2,7 +2,7 @@
 <Data>
     <Doc>
         <Doc_ID>33401205</Doc_ID>
-        <Class>diagnosis</Class>
+        <Class>symptom</Class>
         <Abstract>Severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), responsible for coronavirus disease 2019 (COVID-19), has rapidly spread, resulting in considerable casualties and serious economic loss worldwide. Disease severity and related symptoms markedly vary among individuals. A large number of patients present atypical symptoms, which represent a big challenge for early diagnosis and prompt infection source isolation. Currently, COVID-19 diagnosis predominantly depends on nucleic acid tests (NAT) for SARS-CoV-2 in respiratory specimens, but this method presents a high rate of false negative results. Therefore, serum antibody measurement has been rapidly developed as a supplementary method with the aim of improving diagnostic accuracy. Further, serum antibody levels might help to identify the infection stage, asymptomatic carriers, and patients with diverging severities and to monitor convalescent plasma therapy. In the current review, we aim to present comprehensive evidence to clarify the utility of SARS-CoV-2 antibodies in COVID-19 patients as a reference for use in the clinic.</Abstract>
     </Doc>
 </Data>

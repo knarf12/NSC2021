@@ -2,7 +2,7 @@
 <Data>
     <Doc>
         <Doc_ID>33401328</Doc_ID>
-        <Class>diagnosis</Class>
+        <Class>symptom</Class>
         <Abstract>Background: Currently, the data regarding the effectiveness and safety of tocilizumab as treatment for COVID-19 infection is still conflicting. This study aims to give clear evidence regarding the potential benefit and safety of tocilizumab in improving the outcome of COVID-19 patients. Methods: We systematically searched the PubMed and Europe PMC database using specific keywords related to our aims until November 1st, 2020. All articles published on COVID-19 and tocilizumab were retrieved. Statistical analysis was done using Review Manager 5.4 software. Results: A total of 38 studies with a total of 13 412 COVID-19 patients were included in our analysis. Our meta-analysis showed that tocilizumab treatment is associated with reduction of mortality rate from COVID-19 [OR 0.54 (95% CI 0.42-0.71), p&lt;0.00001, I 2=79%, random-effect modelling], but did not alter the severity of COVID-19 [OR 1.05 (95% CI 0.92-1.20), p=0.47, I 2=84%, random-effect modelling] and length of hospital stay [Mean Difference 1.77 days (95% CI -0.61-4.14 days), p=0.15, I 2=97%, random-effect modelling]. Tocilizumab also does not associated with serious adverse events compared with standard of care treatment [OR 0.91 (95% CI 0.71-1.15), p=0.42, I 2=46%, random-effect modelling]. Conclusion: Our study does not support the routine use of tocilizumab for COVID-19 patients. Future studies should focus more on other potential therapies for COVID-19 patients.</Abstract>
     </Doc>
 </Data>

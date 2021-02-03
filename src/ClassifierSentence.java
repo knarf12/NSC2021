@@ -22,32 +22,21 @@ import org.w3c.dom.Element;
 public class ClassifierSentence {
 	private static List<String> stopword;
 	private static HashMap<Integer, ArrayList<String>> singleDoc = new HashMap<Integer, ArrayList<String>>();
-	private static HashMap<Integer, ArrayList<String>> sympST = new HashMap<Integer, ArrayList<String>>();
-	private static HashMap<Integer, ArrayList<String>> diagST = new HashMap<Integer, ArrayList<String>>();
-	private static HashMap<Integer, ArrayList<String>> reflecST = new HashMap<Integer, ArrayList<String>>();
-	
-	
-	static String type = "";
-	private static ArrayList<String> originalDoc = new ArrayList<String>();
-	private static ArrayList<String> originalsympST = new ArrayList<String>();
-	private static ArrayList<String> originaldiagST = new ArrayList<String>();
-	private static ArrayList<String> originalreflecST = new ArrayList<String>();
-	
-	
-	
-	private static ArrayList<String> wordList = new ArrayList<String>();
-	private static HashMap<Integer, ArrayList<String>> sigleType = new HashMap<Integer, ArrayList<String>>();
-	private static ArrayList<String> sympDoc = new ArrayList<String>();
-	private static ArrayList<String> diagDoc = new ArrayList<String>();
-	private static ArrayList<String> reflecDoc = new ArrayList<String>();
-	
-	static ArrayList<String> DocsTest = new ArrayList<String>();
 	
 	private static HashMap<Integer, ArrayList<Integer>> VtDoclist = new HashMap<Integer, ArrayList<Integer>>();
 	private static HashMap<Integer, ArrayList<Integer>> VtDocTr = new HashMap<Integer, ArrayList<Integer>>();
+	private static HashMap<Integer, ArrayList<String>> sigleType = new HashMap<Integer, ArrayList<String>>();
+	static String type = "";
+	
+	private static ArrayList<String> originalDoc = new ArrayList<String>();
+	private static ArrayList<String> wordList = new ArrayList<String>();
+	static ArrayList<String> DocsTest = new ArrayList<String>();
+	
 	static HashMap<Integer, ArrayList<Double>> evaluaCosine = new HashMap<Integer, ArrayList<Double>>();
 	static HashMap<Integer, ArrayList<Double>> evaluaBM25 = new HashMap<Integer, ArrayList<Double>>();
-	static HashMap<Integer, String> docKNN = new HashMap<Integer, String>();
+	
+	//static HashMap<Integer, String> docKNN = new HashMap<Integer, String>();
+	
 	static ArrayList<Double> evaluaKNN = new ArrayList<>();
 	static ArrayList<Double> evaluaNVB = new ArrayList<>();
 	
@@ -94,6 +83,7 @@ public class ClassifierSentence {
 			}
 			evaluaCosine.put(i, similar);
 		}
+		//end
 		
 		//bm25+
 		bm25F.DocAVGST(VtDoclist);
@@ -101,10 +91,10 @@ public class ClassifierSentence {
 			ArrayList<Double> similar = new ArrayList<Double>();
 			for (int j2 = 0; j2 < VtDocTr.size(); j2++) {
 				similar.add(bm25F.BM25PlusST(VtDocTr.get(j2), VtDoclist.get(j), bm25F.getAllST(VtDoclist)));
-//					System.out.println(j2);
 			}
 			evaluaBM25.put(j, similar);
 		}
+		//end
 		
 		//KNN
 		//System.out.println(VtDocTr.size());
@@ -114,113 +104,17 @@ public class ClassifierSentence {
 			evaluaNVB.add(NaiveBayes.NVBST(VtDoclist.get(i), VtDocTr));
 			
 		}
-	}
-	
-	
-	
-	protected static void processMulti(String path) throws ParserConfigurationException, SAXException, IOException {
-		loadMultiData(path);
-		splitSentence();
-		
-	}
-	
-	
-	private static void loadMultiData(String path) throws ParserConfigurationException, SAXException, IOException {
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		DocumentBuilder db = dbf.newDocumentBuilder(); 
-		File folder = new File(path);
-		File[] listOfFiles = folder.listFiles();
-        for(int i = 0; i < listOfFiles.length; i++){
-            String filename = listOfFiles[i].getName();
-            if(filename.endsWith(".xml")||filename.endsWith(".XML")) {
-//                System.out.println(filename);
-                Document doc = db.parse(path+"/"+filename);  
-            	doc.getDocumentElement().normalize(); 
-            	NodeList nodeList = doc.getElementsByTagName("Doc");
-            	ReadXML(nodeList);
-            }
-        }
-	}
-	private static  void splitSentence() {
-		// TODO Auto-generated method stub
-		
-		/// symptom
-		int i = 0;
-		for (String Doc : sympDoc) {
-			for(String sentence : Doc.split("[:\\.]")) {
-				//System.out.println(sentence);
-				originalsympST.add(sentence);
-				ArrayList<String> oneDoc = new ArrayList<String>();
-				for (String word : sentence.split("[\\-\\[,.() ; % : / \t]")) {
-					word = word.toLowerCase();
-					if(word.length()>1 && ! mathMethod.isNumeric(word)) {
-						oneDoc.add(word);
-						if(!wordList.contains(word)) {
-							wordList.add(word);
-						}
-					}
-				}
-				oneDoc.removeAll(stopword);
-				sympST.put(i, oneDoc);
-				i+=1;
-			}
-		}
-		
-		//diagnosis
-		i = 0;
-		for (String Doc : diagDoc) {
-			
-			for(String sentence : Doc.split("[:\\.]")) {
-				//System.out.println(sentence);
-				originaldiagST.add(sentence);
-				ArrayList<String> oneDoc = new ArrayList<String>();
-				for (String word : sentence.split("[\\-\\[,.() ; % : / \t]")) {
-					word = word.toLowerCase();
-					if(word.length()>1 && ! mathMethod.isNumeric(word)) {
-						oneDoc.add(word);
-						if(!wordList.contains(word)) {
-							wordList.add(word);
-						}
-					}
-				}
-				oneDoc.removeAll(stopword);
-				diagST.put(i, oneDoc);
-				i+=1;
-			}
-		}
-		
-		
-		
-		//reflection
-		i = 0;
-		for (String Doc : reflecDoc) {
-			for(String sentence : Doc.split("[:\\.]")) {
-				//System.out.println(sentence);
-				originalreflecST.add(sentence);
-				ArrayList<String> oneDoc = new ArrayList<String>();
-				for (String word : sentence.split("[\\-\\[,.() ; % : / \t]")) {
-					word = word.toLowerCase();
-					if(word.length()>1 && ! mathMethod.isNumeric(word)) {
-						oneDoc.add(word);
-						if(!wordList.contains(word)) {
-							wordList.add(word);
-						}
-					}
-				}
-				oneDoc.removeAll(stopword);
-				reflecST.put(i, oneDoc);
-				i+=1;
-			}
-		}
-
+		//end 
 	}
 	
 	protected static void getSTKNN() {
 		// <= 4.0
-		System.out.println("KNN");
+		//System.out.println("KNN");
 		for (int i = 0; i < evaluaKNN.size(); i++) {
-			if (evaluaKNN.get(i)<=4) {
-				UsageModelPanel.showSentence(originalDoc.get(i));
+			if (evaluaKNN.get(i)<=4.0) {
+				if(originalDoc.get(i).length() > 10 ) {
+					UsageModelPanel.showSentence(originalDoc.get(i));
+				}
 			}
 		}
 	}
@@ -237,16 +131,23 @@ public class ClassifierSentence {
 			}
 			if(d==1) {
 				//System.out.println(originalDoc.get(i));
-				UsageModelPanel.showSentence(originalDoc.get(i));
+				if(originalDoc.get(i).length() > 10 ) {
+					UsageModelPanel.showSentence(originalDoc.get(i));
+				}
 			}
 		}
 	}
 	
 	protected static void getSTNVB() {
-		System.out.println("NVB");
+		//System.out.println("NVB");
 		for (int i = 0; i < evaluaNVB.size(); i++) {
-			if (evaluaNVB.get(i)> 5.5) {
-				UsageModelPanel.showSentence(originalDoc.get(i));
+			String str =  evaluaNVB.get(i).toString();
+			String []spl =  str.split("\\.");
+			if (Integer.parseInt(spl[0]) > 4) {
+				//System.out.println(originalDoc.get(i));
+				if(originalDoc.get(i).length() > 10 ) {
+					UsageModelPanel.showSentence(originalDoc.get(i));
+				}
 			}
 		}
 	}
@@ -266,7 +167,9 @@ public class ClassifierSentence {
 			}
 			if(d==1) {
 				//System.out.println(originalDoc.get(i));
-				UsageModelPanel.showSentence(originalDoc.get(i));
+				if(originalDoc.get(i).length() > 10 ) {
+					UsageModelPanel.showSentence(originalDoc.get(i));
+				}
 			}
 		}
 	}
@@ -337,26 +240,6 @@ public class ClassifierSentence {
         }
 	}
 	
-	
-	public static void ReadXMLMT(NodeList nodeList) {
-    	for (int itr = 0; itr < nodeList.getLength(); itr++)   
-    	{  
-	    	Node node = nodeList.item(itr);
-	    	if (node.getNodeType() == Node.ELEMENT_NODE)   
-	    	{  
-	    		Element eElement = (Element) node; 
-	    		if(eElement.getElementsByTagName("Abstract").item(0).getTextContent().length() > 1) {
-	    			if(eElement.getElementsByTagName("Class").item(0).getTextContent().equalsIgnoreCase("symptom")) {
-	    				sympDoc.add(eElement.getElementsByTagName("Abstract").item(0).getTextContent());
-	    			}else if(eElement.getElementsByTagName("Class").item(0).getTextContent().equalsIgnoreCase("reflection")) {
-	    				reflecDoc.add(eElement.getElementsByTagName("Abstract").item(0).getTextContent());
-	    			}else if(eElement.getElementsByTagName("Class").item(0).getTextContent().equalsIgnoreCase("diagnosis")) {
-	    				diagDoc.add(eElement.getElementsByTagName("Abstract").item(0).getTextContent());
-	    			}
-	    		}
-	    	}
-    	}
-	}
 	
 	public static ArrayList<String> ReadXML(NodeList nodeList) {
     	ArrayList<String> Data = new  ArrayList<String>();

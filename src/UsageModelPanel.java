@@ -4,6 +4,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -11,6 +13,10 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JRadioButton;
@@ -32,7 +38,7 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 	private JRadioButton rdbtnPubmed;
 	private static JTextArea textArea;
 	private static JTextArea textArea_1;
-	private JFileChooser fileChooser = new JFileChooser(); 
+	//private JFileChooser fileChooser = new JFileChooser(); 
 	private ButtonGroup bgSearch = new ButtonGroup();
 	private ButtonGroup bgTec = new ButtonGroup();
 	handlerActionSentence hsentence = new handlerActionSentence();
@@ -100,15 +106,10 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
-		//textArea.setBounds(333, 313, 504, 373);
-		//add(textArea);
-		//textArea.setText("1234");
 		
 		textArea_1 = new JTextArea();
 		textArea_1.setBackground(Color.WHITE);
 		textArea_1.setEditable(false);
-		//textArea_1.setBounds(54, 315, 227, 373);
-		//add(textArea_1);
 		
 		bgSearch.add(rdbtnLocal);
 		bgSearch.add(rdbtnPubmed);
@@ -194,7 +195,21 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 				CheckprocessML = false;
 				
 			}else if(hsentence.docchoice.equalsIgnoreCase("mutiDoc") && selected ) {
-				System.out.println("muti true");
+				//System.out.println("muti true");
+				try {
+					System.out.println("Process");
+					ClassifierMulti.processMulti(txtSearch.getText());
+					System.out.println("finished");
+				} catch (ParserConfigurationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SAXException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				CheckprocessSG = false;
 				CheckprocessML = true;
 			}
@@ -202,7 +217,7 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 		if(obj.equals(btnSearch)) {
 			setSearch();
 			if(hsentence.docchoice.equalsIgnoreCase("singleDoc")) {
-				
+				JFileChooser fileChooser = new JFileChooser(); 
 				fileChooser.setCurrentDirectory(new java.io.File("."));
 				fileChooser.setAcceptAllFileFilterUsed(false);
 				if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
@@ -213,6 +228,7 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 				      selected =false;
 				}
 			}else if(hsentence.docchoice.equalsIgnoreCase("mutiDoc")) {
+				JFileChooser fileChooser = new JFileChooser(); 
 				fileChooser.setCurrentDirectory(new java.io.File("."));
 				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				fileChooser.setAcceptAllFileFilterUsed(false);
