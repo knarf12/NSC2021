@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33501730</Doc_ID>
+        <Class>symptom</Class>
+        <Abstract>The analysis of genetic diversity in SARS-CoV-2 is the focus of several studies, providing insights into how the virus emerged and evolves. Most common changes in SARS CoV-2 are single or point nucleotide substitutions, meanwhile insertions and deletions (indels) have been identified as a less frequent source of viral genetic variability. Here, we report the emergence of a 12-nucleotide deletion in ORF7a, resulting in a 4-amino-acid in-frame deletion. The Δ12 variant was identified in viruses from patients of a single outbreak and represents the first report of this deletion in South American isolates. Phylogenetic analysis revealed that Δ12 strains belong to the lineage B.1.1 and clustered separated from the remaining Uruguayan strains. The ∆12 variant was detected in 14 patients of this outbreak by NGS sequencing and/or two rapid and economic methodologies: Sanger amplicon sequencing and capillary electrophoresis. The presence of strong molecular markers as the deletion described here are useful for tracking outbreaks and reveal a significant aspect of the SARS-CoV-2 evolution on the robustness of the virus to keep its functionality regardless loss of genetic material.</Abstract>
+    </Doc>
+</Data>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33501464</Doc_ID>
+        <Class>symptom</Class>
+        <Abstract>A Bayesian framework for group testing under dilution effects is introduced. This work has particular relevance given the pressing public health need to enhance testing capacity for COVID-19, and the need for wide-scale and repeated testing for surveillance. The proposed Bayesian approach allows for dilution effects in group testing and for general test response distributions beyond just binary outcomes. It is shown that even with strong dilution effects, an intuitive and simple-to-implement group testing selection rule, referred to as the Bayesian halving algorithm, has attractive optimal properties. A web-based calculator is introduced to assist and guide decisions on when and how to pool under various conditions.</Abstract>
+    </Doc>
+</Data>

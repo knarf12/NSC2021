@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33501461</Doc_ID>
+        <Class>symptom</Class>
+        <Abstract>Intervention strategies for minimizing indoor SARS-CoV-2 transmission are often based on anecdotal evidence because there is little evidence-based research to support them. We developed a spatially-explicit agent-based model for simulating indoor respiratory pathogen transmission, and used it to compare effects of four interventions on reducing individual-level SARS-CoV-2 transmission risk by simulating a well-known case study. We found that imposing movement restrictions and efficacious mask usage appear to have the greatest effects on reducing infection risk, but multiple concurrent interventions are required to minimize the proportion of susceptible individuals infected. Social distancing had little effect on reducing transmission if individuals move during the gathering. Furthermore, our results suggest that there is potential for ventilation airflow to expose susceptible people to aerosolized pathogens even if they are relatively far from infectious individuals. Maximizing rates of aerosol removal is the key to successful transmission-risk reduction when using ventilation systems as intervention tools. Article summary line: Imposing mask usage requirements, group size restrictions, duration limits, and social distancing policies can have additive, and in some cases multiplicative protective effects on SARS-CoV-2 infection risk during indoor events.</Abstract>
+    </Doc>
+</Data>

@@ -112,7 +112,7 @@ public class TrainModelPanel extends JPanel implements ActionListener{
 		
 		JLabel lbSource = new JLabel("Source Selection :");
 		lbSource.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbSource.setBounds(78, 194, 145, 14);
+		lbSource.setBounds(79, 191, 145, 14);
 		add(lbSource);
 		
 		textField = new JTextField();

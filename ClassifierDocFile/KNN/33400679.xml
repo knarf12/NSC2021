@@ -2,7 +2,7 @@
 <Data>
     <Doc>
         <Doc_ID>33400679</Doc_ID>
-        <Class>reflection</Class>
+        <Class>diagnosis</Class>
         <Abstract>Background: Machine learning (ML) models require large datasets which may be siloed across different healthcare institutions. Current ML studies focusing on coronavirus disease 2019 (COVID-19) are limited to single hospital data which limits model generalizability. Objective: Using federated learning, a ML technique that avoids locally aggregating raw clinical data across multiple institutions, we predict mortality within seven days in hospitalized COVID-19 patients. Methods: Patient data was collected from Electronic Health Records (EHRs) from five hospitals within the Mount Sinai Health System (MSHS). Logistic Regression with L1 regularization (LASSO) and Multilayer Perceptron (MLP) models were trained using local data at each site, a pooled model with combined data from all five sites, and a federated model that only shared parameters with a central aggregator. Results: LASSO-federated outperformed LASSO-local at three hospitals, and MLP-federated performed better than MLP-local at all five hospitals as measured by area under the receiver-operating characteristic (AUC-ROC). LASSO-pooled outperformed LASSO-federated at all hospitals, and MLP-federated outperformed MLP-pooled at two hospitals. Conclusions: Federated learning shows promise in COVID-19 EHR data to develop robust predictive models without compromising patient privacy.</Abstract>
     </Doc>
 </Data>

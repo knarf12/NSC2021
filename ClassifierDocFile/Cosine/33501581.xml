@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33501581</Doc_ID>
+        <Class>symptom</Class>
+        <Abstract>Emerging evidence has confirmed meteorological factors and air pollutants affect novel coronavirus disease 2019 (COVID-19). However, no studies to date have considered the impact of interactions between meteorological factors and air pollutants on COVID-19 transmission. This study explores the association between ambient air pollutants (PM2.5, NO2, SO2, CO, and O3), meteorological factors (average temperature, diurnal temperature range, relative humidity, wind velocity, air pressure, precipitation, and hours of sunshine), and their interaction on confirmed case counts of COVID-19 in 120 Chinese cities. We modeled total confirmed cases of COVID-19 as the dependent variable with meteorological factors, air pollutants, and their interactions as the independent variables. To account for potential migration effects, we included the migration scale index (MSI) from Wuhan to each of the 120 cities included in the model, using data from 15 Jan. to 18 Mar. 2020. As an important confounding factor, MSI was considered in a negative binomial regression analysis. Positive associations were found between the number of confirmed cases of COVID-19 and CO, PM2.5, relative humidity, and O3, with and without MSI-adjustment. Negative associations were also found for SO2 and wind velocity both with and without controlling for population migration. In addition, air pollutants and meteorological factors had interactive effects on COVID-19 after controlling for MSI. In conclusion, air pollutants, meteorological factors, and their interactions all affect COVID-19 cases.</Abstract>
+    </Doc>
+</Data>

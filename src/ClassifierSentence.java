@@ -21,24 +21,27 @@ import org.w3c.dom.Element;
 
 public class ClassifierSentence {
 	private static List<String> stopword;
-	private static HashMap<Integer, ArrayList<String>> singleDoc = new HashMap<Integer, ArrayList<String>>();
+	private static HashMap<Integer, ArrayList<String>> singleDoc ;
 	
-	private static HashMap<Integer, ArrayList<Integer>> VtDoclist = new HashMap<Integer, ArrayList<Integer>>();
-	private static HashMap<Integer, ArrayList<Integer>> VtDocTr = new HashMap<Integer, ArrayList<Integer>>();
-	private static HashMap<Integer, ArrayList<String>> sigleType = new HashMap<Integer, ArrayList<String>>();
+	private static HashMap<Integer, ArrayList<Integer>> VtDoclist ;
+	private static HashMap<Integer, ArrayList<Integer>> VtDocTr ;
+	private static HashMap<Integer, ArrayList<String>> sigleType ;
 	static String type = "";
 	
 	private static ArrayList<String> originalDoc = new ArrayList<String>();
 	private static ArrayList<String> wordList = new ArrayList<String>();
 	static ArrayList<String> DocsTest = new ArrayList<String>();
 	
-	static HashMap<Integer, ArrayList<Double>> evaluaCosine = new HashMap<Integer, ArrayList<Double>>();
-	static HashMap<Integer, ArrayList<Double>> evaluaBM25 = new HashMap<Integer, ArrayList<Double>>();
-	
+	static HashMap<Integer, ArrayList<Double>> evaluaCosine;
+	static HashMap<Integer, ArrayList<Double>> evaluaBM25 ;
+	static double[] maxBM25;
+//	static double[] maxKNN;
+//	static double[] maxNVB;
+	static double[] maxCS;
 	//static HashMap<Integer, String> docKNN = new HashMap<Integer, String>();
 	
-	static ArrayList<Double> evaluaKNN = new ArrayList<>();
-	static ArrayList<Double> evaluaNVB = new ArrayList<>();
+	static ArrayList<Double> evaluaKNN ;
+	static ArrayList<Double> evaluaNVB ;
 	
 	public ClassifierSentence(){
 		
@@ -46,15 +49,26 @@ public class ClassifierSentence {
 	
 	protected static void processSingle(String path) {
 		// TODO Auto-generated method stub
+		singleDoc = new HashMap<Integer, ArrayList<String>>();
+		VtDoclist = new HashMap<Integer, ArrayList<Integer>>();
+		VtDocTr = new HashMap<Integer, ArrayList<Integer>>();
+		sigleType = new HashMap<Integer, ArrayList<String>>();
+		
+		evaluaCosine = new HashMap<Integer, ArrayList<Double>>();
+		evaluaBM25 = new HashMap<Integer, ArrayList<Double>>();
+		evaluaKNN = new ArrayList<>();
+		evaluaNVB = new ArrayList<>();
+		
 		try {
 			stopword = Files.readAllLines(Paths.get("./dic/stopwordAndSpc_eng.txt"));
 			loadSingleFile(path);
 			if (type.equalsIgnoreCase("diagnosis")) {
-				loadTrainset("./data/data-Diag");
+				//System.out.println(type);
+				loadTrainset("./data/SentenceTrain/data-Diag");
 			}else if (type.equalsIgnoreCase("reflection")) {
-				loadTrainset("./data/data-Reflec");
+				loadTrainset("./data/SentenceTrain/data-Reflec");
 			}else if (type.equalsIgnoreCase("symptom")) {
-				loadTrainset("./data/data-Sympt");
+				loadTrainset("./data/SentenceTrain/data-Sympt");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -76,22 +90,30 @@ public class ClassifierSentence {
 		//end vector
 
 		//cosine
+		maxCS = new double[VtDoclist.size()];
 		for (int i = 0; i < VtDoclist.size(); i++) {
 			ArrayList<Double> similar = new ArrayList<Double>();
 			for (int j = 0; j < sigleType.size(); j++) {
 				similar.add(mathMethod.CosineSim(VtDocTr.get(j), VtDoclist.get(i)));
+				
 			}
+			//System.out.println(i);
+			//maxCS[i] = bubbleSort(similar);
 			evaluaCosine.put(i, similar);
 		}
 		//end
 		
 		//bm25+
 		bm25F.DocAVGST(VtDoclist);
+		maxBM25 = new double[VtDoclist.size()];
 		for (int j = 0; j < VtDoclist.size(); j++) {
 			ArrayList<Double> similar = new ArrayList<Double>();
 			for (int j2 = 0; j2 < VtDocTr.size(); j2++) {
+				//System.out.println();
 				similar.add(bm25F.BM25PlusST(VtDocTr.get(j2), VtDoclist.get(j), bm25F.getAllST(VtDoclist)));
 			}
+			//System.out.println(similar);
+			maxBM25[j] = bubbleSort(similar);
 			evaluaBM25.put(j, similar);
 		}
 		//end
@@ -108,70 +130,83 @@ public class ClassifierSentence {
 	}
 	
 	protected static void getSTKNN() {
-		// <= 4.0
-		//System.out.println("KNN");
-		for (int i = 0; i < evaluaKNN.size(); i++) {
-			if (evaluaKNN.get(i)<=4.0) {
-				if(originalDoc.get(i).length() > 10 ) {
-					UsageModelPanel.showSentence(originalDoc.get(i));
+		try {
+			for (int i = 0; i < evaluaKNN.size(); i++) {
+				System.out.println(i+" "+originalDoc.get(i) +" \n"+ evaluaKNN.get(i));
+				if (evaluaKNN.get(i)<3.2) {
+					if(originalDoc.get(i).length() > 17 ) {
+						UsageModelPanel.showSentence(" "+originalDoc.get(i)+".");
+					}
 				}
 			}
+		} catch (IndexOutOfBoundsException e) {
+			// TODO: handle exception
 		}
+		// <= 4.0
+		//System.out.println("KNN");
+		
 	}
 	
 	protected static void getSTCosine() {
-		//System.out.println("getSTCosine");
-		for (int i = 0; i < evaluaCosine.size(); i++) {
-			int d=0;
-			for (int j = 0; j <  evaluaCosine.get(1).size(); j++) {
-				//System.out.println(evaluaCosine.get(i).get(j));
-				if(evaluaCosine.get(i).get(j) >= 0.1) {
-					d=1;
+		try {
+			for (int i = 0; i < evaluaCosine.size(); i++) {
+				int d=0;
+				for (int j = 0; j < evaluaCosine.get(1).size(); j++) {
+					if(evaluaCosine.get(i).get(j)> 0.45) {
+						d=1;
+					}
+				}
+				if(d==1) {
+					if(originalDoc.get(i).length() > 17 ) {
+						UsageModelPanel.showSentence(" "+originalDoc.get(i)+".");
+					}
 				}
 			}
-			if(d==1) {
-				//System.out.println(originalDoc.get(i));
-				if(originalDoc.get(i).length() > 10 ) {
-					UsageModelPanel.showSentence(originalDoc.get(i));
-				}
-			}
+		} catch (IndexOutOfBoundsException e) {
+			// TODO: handle exception
 		}
+		
+		
 	}
 	
 	protected static void getSTNVB() {
 		//System.out.println("NVB");
-		for (int i = 0; i < evaluaNVB.size(); i++) {
-			String str =  evaluaNVB.get(i).toString();
-			String []spl =  str.split("\\.");
-			if (Integer.parseInt(spl[0]) > 4) {
-				//System.out.println(originalDoc.get(i));
-				if(originalDoc.get(i).length() > 10 ) {
-					UsageModelPanel.showSentence(originalDoc.get(i));
+		try {
+			for (int i = 0; i < evaluaNVB.size(); i++) {
+				String str =  evaluaNVB.get(i).toString();
+				String []spl =  str.split("\\.");
+				if (Integer.parseInt(spl[0]) > 7) {
+					//System.out.println(originalDoc.get(i));
+					if(originalDoc.get(i).length() > 17 ) {
+						UsageModelPanel.showSentence(" "+originalDoc.get(i)+".");
+					}
 				}
 			}
+		} catch (IndexOutOfBoundsException e) {
+			// TODO: handle exception
 		}
+	
 	}
 	
 	protected static void getSTBM25() {
-		
-		DecimalFormat df2 = new DecimalFormat("#.##");
-		for (int i = 0; i < evaluaBM25.size(); i++) {
-			Double sum = 0.0d;
-			int d=0;
-			for (int k = 0; k < evaluaBM25.get(0).size(); k++) {
-				
-				sum += sum + evaluaBM25.get(i).get(k);
-				if(evaluaBM25.get(i).get(k)>15.0d) {
-					d=1;
+		try {
+			for (int i = 0; i < evaluaBM25.size(); i++) {
+				int d=0;
+				for (int j = 0; j < evaluaBM25.get(1).size(); j++) {
+					if(evaluaBM25.get(i).get(j)> 22.5) {
+						d=1;
+					}
+				}
+				if(d==1 && i> 1) {
+					if(originalDoc.get(i).length() > 17 ) {
+						UsageModelPanel.showSentence(" "+originalDoc.get(i)+".");
+					}
 				}
 			}
-			if(d==1) {
-				//System.out.println(originalDoc.get(i));
-				if(originalDoc.get(i).length() > 10 ) {
-					UsageModelPanel.showSentence(originalDoc.get(i));
-				}
-			}
+		} catch (IndexOutOfBoundsException e) {
+			// TODO: handle exception
 		}
+		
 	}
 	
 	static void loadSingleFile(String path) throws SAXException, IOException, ParserConfigurationException{
@@ -181,7 +216,7 @@ public class ClassifierSentence {
 		
 		//an instance of builder to parse the specified xml file  
 		DocumentBuilder db = dbf.newDocumentBuilder();  
-		Document doc = db.parse(file);  
+		Document doc = db.parse(file); 
 		doc.getDocumentElement().normalize();  
 		NodeList nodeList = doc.getElementsByTagName("Doc");  
 		data.addAll(ReadXML(nodeList));
@@ -193,7 +228,7 @@ public class ClassifierSentence {
 			//System.out.println(sentence);
 			originalDoc.add(sentence);
 			ArrayList<String> oneDoc = new ArrayList<String>();
-			for (String word : sentence.split("[\\-\\[,.() ; % : / \t]")) {
+			for (String word : sentence.split("[\\-\\[,.();% : / \t]")) {
 				word = word.toLowerCase();
 				if(word.length()>1 && ! mathMethod.isNumeric(word)) {
 					oneDoc.add(word);
@@ -215,9 +250,9 @@ public class ClassifierSentence {
         int kk=0;
         for(int i = 0; i < listOfFiles.length; i++){
             String filename = listOfFiles[i].getName();
-            
+            //System.out.println(filename);
             if(filename.endsWith(".txt")||filename.endsWith(".TXT")) {
-            	
+            	//System.out.println(filename.endsWith(".txt"));
                 br = new BufferedReader(new FileReader(path+"/"+filename));
                 String line = br.readLine();
                 for(String sentence : line.split("[:\\.]")) {
@@ -257,4 +292,32 @@ public class ClassifierSentence {
     	}
 		return Data;
 	}
+	
+	//sort
+		public static double bubbleSort(ArrayList<Double> similar) {  
+			double max[] =new double[similar.size()];
+			for (int i = 0; i < max.length; i++) {
+				if (similar.get(i).isNaN()) {
+					max[i] = 0;
+				}else {
+					max[i] = similar.get(i);
+				}
+			}
+	        int n = max.length;  
+	        double temp = 0; 
+	        
+	         for(int i=0; i < n; i++){  
+	                 for(int j=1; j < (n-i); j++){  
+	                          if(max[j-1] < max[j]){  
+	                                 //swap elements  
+	                                 temp = max[j-1];  
+	                                 max[j-1] = max[j];  
+	                                 max[j] = temp; 
+	                         }    
+	                 }
+	         }
+	         //System.out.println(max[0]);
+	         //System.out.println(max[1]);
+	         return max[0];  
+	    }
 }

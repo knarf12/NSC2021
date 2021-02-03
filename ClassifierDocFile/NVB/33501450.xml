@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33501450</Doc_ID>
+        <Class>diagnosis</Class>
+        <Abstract>A "universal" vaccine design platform that can rapidly generate multiplex vaccine candidates is critically needed to control future pandemics. Here, using SARS-CoV-2 pandemic virus as a model, we have developed such a platform by CRISPR engineering of bacteriophage T4. A pipeline of vaccine candidates were engineered by incorporating various viral components into appropriate compartments of phage nanoparticle structure. These include: expressible spike genes in genome, spike and envelope epitopes as surface decorations, and nucleocapsid proteins in packaged core. Phage decorated with spike trimers is found to be the most potent vaccine candidate in mouse and rabbit models. Without any adjuvant, this vaccine stimulated robust immune responses, both T H 1 and T H 2 IgG subclasses, blocked virus-receptor interactions, neutralized viral infection, and conferred complete protection against viral challenge. This new type of nanovaccine design framework might allow rapid deployment of effective phage-based vaccines against any emerging pathogen in the future.</Abstract>
+    </Doc>
+</Data>

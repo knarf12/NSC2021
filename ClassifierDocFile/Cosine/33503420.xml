@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33503420</Doc_ID>
+        <Class>symptom</Class>
+        <Abstract>Although vaccines against severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) are under development, the antigen epitopes on the virus and their immunogenicity are poorly understood. Here, we simulate the 3D structures and predict the B cell epitopes on the spike (S), envelope (E), membrane (M), and nucleocapsid (N) proteins of SARS-CoV-2 using structure-based approaches and validate epitope immunogenicity by immunizing mice. Almost all 33 predicted epitopes effectively induce antibody production, six of these are immunodominant epitopes in individuals, and 23 are conserved within SARS-CoV-2, SARS-CoV, and bat coronavirus RaTG13. We find that the immunodominant epitopes of individuals with domestic (China) SARS-CoV-2 are different from those of individuals with imported (Europe) SARS-CoV-2, which may be caused by mutations on the S (G614D) and N proteins. Importantly, we find several epitopes on the S protein that elicit neutralizing antibodies against D614 and G614 SARS-CoV-2, which can contribute to vaccine design against coronaviruses.</Abstract>
+    </Doc>
+</Data>

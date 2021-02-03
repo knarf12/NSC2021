@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33502877</Doc_ID>
+        <Class>symptom</Class>
+        <Abstract>Background: SARS-CoV-2, which started in Wuhan and later affected the whole world, is the most important disease of the world today. Many ways to inhibit SARS-CoV-2 virus are sought to prevent the spread of this virus. Azithromycin and clarithromycin are considered for the treatment of the SARS-CoV-2 virus, which has a high similarity to previous colonic diseases. Aim: We aimed to determine whether azithromycin and clarithromycin, the RNA-dependent RNA polymerase protein inhibitor used in the treatment of COVID-19, is effective against SARS Cov-2 in silico. Results and conclusion: The 503 analogues of azithromycin and clarithromycin were studied to target SARS-CoV-2 the RNA-dependent RNA polymerase protein inhibition. Maestro program was used to compare the inhibition activities of these analogues. A detailed comparison was made using the numerical value of many parameters obtained. ADME / T properties were then examined to determine the effects and reactions of analogues on human metabolism. In this study, the SARS-CoV2 virus is 6NUR and 6NUS, which is the RNA-dependent RNA polymerase protein. Among these proteins, the best inhibitor among the 503 analogues according to the docking score parameter was 9851445 with a great difference. This analogue was an analogue of azithromycin (Tab. 3, Fig. 6, Ref. 58).</Abstract>
+    </Doc>
+</Data>

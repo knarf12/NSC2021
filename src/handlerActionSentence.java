@@ -23,11 +23,27 @@ public class handlerActionSentence implements ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getActionCommand().equalsIgnoreCase("BM25+")) {
 			algorchoice = "bm25";
+			
 			UsageModelPanel.clearSentence();
 			if(docchoice.equalsIgnoreCase("singleDoc") && UsageModelPanel.CheckprocessSG ) {
 				//System.out.println("BM25+");
+				if (ClassifierSentence.type.equalsIgnoreCase("diagnosis")) {
+					UsageModelPanel.showSentence("SYMPTOM : -\n");
+					UsageModelPanel.showSentence("TREATMENT MODALITY : ");
+					ClassifierSentence.getSTBM25();
+					UsageModelPanel.showSentence("\nREFLECTION/INFLECTION : -");
+				}else if (ClassifierSentence.type.equalsIgnoreCase("reflection")) {
+					UsageModelPanel.showSentence("SYMPTOM : - \n");
+					UsageModelPanel.showSentence("\nTREATMENT MODALITY : -\n");
+					UsageModelPanel.showSentence("REFLECTION/INFLECTION : ");
+					ClassifierSentence.getSTBM25();
+				}else if (ClassifierSentence.type.equalsIgnoreCase("symptom")) {
+					UsageModelPanel.showSentence("SYMPTOM : - ");
+					ClassifierSentence.getSTBM25();
+					UsageModelPanel.showSentence("TREATMENT MODALITY : -\n");
+					UsageModelPanel.showSentence("\nREFLECTION/INFLECTION : -");
+				}
 				
-				ClassifierSentence.getSTBM25();
 			}else if (docchoice.equalsIgnoreCase("mutiDoc") && UsageModelPanel.CheckprocessML) {
 				ClassifierMulti.getSTBM25();
 			}
@@ -35,7 +51,24 @@ public class handlerActionSentence implements ActionListener{
 			algorchoice = "cosine";
 			UsageModelPanel.clearSentence();
 			if(docchoice.equalsIgnoreCase("singleDoc") && UsageModelPanel.CheckprocessSG ) {
-				ClassifierSentence.getSTCosine();
+				
+				if (ClassifierSentence.type.equalsIgnoreCase("diagnosis")) {
+					UsageModelPanel.showSentence("SYMPTOM : -\n");
+					UsageModelPanel.showSentence("TREATMENT MODALITY : ");
+					ClassifierSentence.getSTCosine();
+					UsageModelPanel.showSentence("\nREFLECTION/INFLECTION : -");
+				}else if (ClassifierSentence.type.equalsIgnoreCase("reflection")) {
+					UsageModelPanel.showSentence("SYMPTOM : - \n");
+					UsageModelPanel.showSentence("\nTREATMENT MODALITY : -\n");
+					UsageModelPanel.showSentence("REFLECTION/INFLECTION : ");
+					ClassifierSentence.getSTCosine();
+				}else if (ClassifierSentence.type.equalsIgnoreCase("symptom")) {
+					UsageModelPanel.showSentence("SYMPTOM : - ");
+					ClassifierSentence.getSTCosine();
+					UsageModelPanel.showSentence("\nTREATMENT MODALITY : -\n");
+					UsageModelPanel.showSentence("\nREFLECTION/INFLECTION : - \n");
+				}
+				
 			}else if (docchoice.equalsIgnoreCase("mutiDoc") && UsageModelPanel.CheckprocessML) {
 				ClassifierMulti.getSTCosine();
 			}
@@ -44,7 +77,23 @@ public class handlerActionSentence implements ActionListener{
 			algorchoice = "knn";
 			UsageModelPanel.clearSentence();
 			if(docchoice.equalsIgnoreCase("singleDoc") && UsageModelPanel.CheckprocessSG ) {
-				ClassifierSentence.getSTKNN();
+				if (ClassifierSentence.type.equalsIgnoreCase("diagnosis")) {
+					UsageModelPanel.showSentence("SYMPTOM : -\n");
+					UsageModelPanel.showSentence("TREATMENT MODALITY : ");
+					ClassifierSentence.getSTKNN();
+					UsageModelPanel.showSentence("\nREFLECTION/INFLECTION : -");
+				}else if (ClassifierSentence.type.equalsIgnoreCase("reflection")) {
+					UsageModelPanel.showSentence("SYMPTOM : - \n");
+					UsageModelPanel.showSentence("TREATMENT MODALITY : -\n");
+					UsageModelPanel.showSentence("REFLECTION/INFLECTION : ");
+					ClassifierSentence.getSTKNN();
+				}else if (ClassifierSentence.type.equalsIgnoreCase("symptom")) {
+					UsageModelPanel.showSentence("SYMPTOM : - ");
+					ClassifierSentence.getSTKNN();
+					UsageModelPanel.showSentence("TREATMENT MODALITY : -\n");
+					UsageModelPanel.showSentence("\nREFLECTION/INFLECTION : -");
+				}
+				
 			}else if (docchoice.equalsIgnoreCase("mutiDoc") && UsageModelPanel.CheckprocessML) {
 				ClassifierMulti.getSTKNN();
 			}
@@ -53,8 +102,25 @@ public class handlerActionSentence implements ActionListener{
 			algorchoice = "nv";
 			UsageModelPanel.clearSentence();
 			if(docchoice.equalsIgnoreCase("singleDoc") && UsageModelPanel.CheckprocessSG ) {
-				ClassifierSentence.getSTNVB();
+				if (ClassifierSentence.type.equalsIgnoreCase("diagnosis")) {
+					UsageModelPanel.showSentence("SYMPTOM : -\n");
+					UsageModelPanel.showSentence("TREATMENT MODALITY : ");
+					ClassifierSentence.getSTNVB();
+					UsageModelPanel.showSentence("\nREFLECTION/INFLECTION : -");
+				}else if (ClassifierSentence.type.equalsIgnoreCase("reflection")) {
+					UsageModelPanel.showSentence("SYMPTOM : - \n");
+					UsageModelPanel.showSentence("TREATMENT MODALITY : -\n");
+					UsageModelPanel.showSentence("REFLECTION/INFLECTION : ");
+					ClassifierSentence.getSTNVB();
+				}else if (ClassifierSentence.type.equalsIgnoreCase("symptom")) {
+					UsageModelPanel.showSentence("SYMPTOM : - ");
+					ClassifierSentence.getSTNVB();
+					UsageModelPanel.showSentence("TREATMENT MODALITY : -\n");
+					UsageModelPanel.showSentence("\nREFLECTION/INFLECTION : -");
+				}
+				
 			}else if (docchoice.equalsIgnoreCase("mutiDoc") && UsageModelPanel.CheckprocessML) {
+				System.out.println("NVB");
 				ClassifierMulti.getSTNVB();
 			}
 			

@@ -17,25 +17,30 @@ for child in root:
             if i.text.lower() == 'symptom':
                 y.append(2)
 
-tree = ET.parse('../../data/dataTest/data_test_1.xml') # ระบุ pathfile
-root = tree.getroot()
-for child in root:
-    for i in child:
-        if i.tag == 'Abstract':  # เอาเฉพาะ ข้อมูลที่อยู่ใน tag Abstract
-            data.append(i.text)
-        if i.tag == 'Class':
-            if i.text.lower() == 'diagnosis':
-                y.append(0)
-            if i.text.lower() == 'reflection':
-                y.append(1)
-            if i.text.lower() == 'symptom':
-                y.append(2)
+##tree = ET.parse('../../data/dataTest/data_test_1.xml') # ระบุ pathfile
+##root = tree.getroot()
+##for child in root:
+##    for i in child:
+##        if i.tag == 'Abstract':  # เอาเฉพาะ ข้อมูลที่อยู่ใน tag Abstract
+##            data.append(i.text)
+##        if i.tag == 'Class':
+##            if i.text.lower() == 'diagnosis':
+##                y.append(0)
+##            if i.text.lower() == 'reflection':
+##                y.append(1)
+##            if i.text.lower() == 'symptom':
+##                y.append(2)
                 
 
 # ฟังก์ชัน ทำ feature 
 from textblob import TextBlob
 from textblob import Blobber
 from textblob import Word
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
 from nltk.corpus import stopwords
 from nltk.corpus import wordnet
 
@@ -226,15 +231,15 @@ plot_history(history)
 y_result = model_deep.predict(X_test, batch_size=10, verbose=0)
 ##print(y_result)
 
-f = open("../../Deep/KNNresult.txt", "w")
+##f = open("../../Deep/KNNresult.txt", "w")
 for i in y_result:
-    s = ""
-    for cc in i:
-        s = s +str(cc)+ " "
-    f.write(s)
-    f.write("\n")
+    #s = ""
+    #for cc in i:
+      #  s = s +str(cc)+ " "
+    #f.write(s)
+    #f.write("\n")
     print(s)
-f.close()
+##f.close()
 
 
 ##from sklearn.metrics import accuracy_score,precision_score,recall_score,f1_score,roc_auc_score,matthews_corrcoef,classification_report

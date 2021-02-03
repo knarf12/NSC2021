@@ -42,11 +42,11 @@ public class handlerAction implements ActionListener{
 			
 			if(algorithm.equalsIgnoreCase("BM25+")) {
 				if (midProcess.evaluaBM25.size()<= 50) {
-					getDocDiagnosis(midProcess.evaluaBM25, 85.0d);
+					getDocSymptom(midProcess.evaluaBM25, 85.0d);
 				}else if (midProcess.evaluaBM25.size()<= 220) {
-					getDocDiagnosis(midProcess.evaluaBM25, 140.0d);
+					getDocSymptom(midProcess.evaluaBM25, 140.0d);
 				}else {
-					getDocDiagnosis(midProcess.evaluaBM25, 160.0d);
+					getDocSymptom(midProcess.evaluaBM25, 160.0d);
 				}
 				
 			}else if (algorithm.equalsIgnoreCase("Cosine")) {
@@ -93,11 +93,11 @@ public class handlerAction implements ActionListener{
 			TrainModelPanel.clearTextArea();
 			if(algorithm.equalsIgnoreCase("BM25+")) {
 				if (midProcess.evaluaBM25.size()<= 50) {
-					getDocDiagnosis(midProcess.evaluaBM25, 85.0d);
+					getDocReflection(midProcess.evaluaBM25, 85.0d);
 				}else if (midProcess.evaluaBM25.size()<= 220) {
-					getDocDiagnosis(midProcess.evaluaBM25, 140.0d);
+					getDocReflection(midProcess.evaluaBM25, 140.0d);
 				}else {
-					getDocDiagnosis(midProcess.evaluaBM25, 160.0d);
+					getDocReflection(midProcess.evaluaBM25, 160.0d);
 				}
 				
 			}else if (algorithm.equalsIgnoreCase("Cosine")) {
@@ -146,6 +146,7 @@ public class handlerAction implements ActionListener{
 	private void getDocReflection(HashMap<Integer, ArrayList<Double>> evalua, Double rate) {
 		// TODO Auto-generated method stub
 		int s=0;
+		System.out.println(rate);
 		for (int i = 1; i <= evalua.size(); i++) {
 			int k = 0;
 			for (int j = 10; j < evalua.get(i).size(); j++) {
@@ -170,6 +171,7 @@ public class handlerAction implements ActionListener{
 	private void getDocDiagnosis(HashMap<Integer, ArrayList<Double>> evalua, Double rate) {
 		// TODO Auto-generated method stub
 		int s=0;
+		System.out.println(rate);
 		for (int i = 1; i <= evalua.size(); i++) {
 			int k = 0;
 			for (int j = 0; j < evalua.get(1).size(); j++) {
@@ -178,6 +180,7 @@ public class handlerAction implements ActionListener{
 					k++;
 				}
 			}
+			System.out.println(k);
 			if(k>=5) {
 				s+=1;
 				TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i-1));
@@ -195,10 +198,10 @@ public class handlerAction implements ActionListener{
 	private void getDocSymptom(HashMap<Integer, ArrayList<Double>> evalua, Double rate) {
 		// TODO Auto-generated method stub
 		int s=0;
+		System.out.println(evalua.size());
 		for (int i = 1; i <= evalua.size(); i++) {
 			int k = 0;
 			for (int j = 20; j < evalua.get(i).size(); j++) {
-				
 				if (evalua.get(i).get(j) >= rate ) {
 					k++;
 				}
@@ -221,7 +224,7 @@ public class handlerAction implements ActionListener{
 		if(algorithm.equalsIgnoreCase("BM25+")) {
 			if (midProcess.evaluaBM25.size()<= 50) {
 				r1 = 85.0d;
-				
+				System.out.println(r1);
 			}else if (midProcess.evaluaBM25.size()<= 220) {
 				r1 = 140.0d;
 			}else {
@@ -243,10 +246,11 @@ public class handlerAction implements ActionListener{
 						k++;
 					}else if (evalua.get(i).get(j) >= r1 && j<20) {
 						k2++;
-					}else if(evalua.get(i).get(j) >= r1 ){
+					}else if(evalua.get(i).get(j) >= r1 && j<30 && j>= 20){
 						k3++;
 					}
 				}
+				
 				if(k>=5 || k2>=5 || k3 >=5) {
 					s+=1;
 					TrainModelPanel.addTextAreaWC2(midProcess.nameDoc.get(i-1));

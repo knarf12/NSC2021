@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33501443</Doc_ID>
+        <Class>diagnosis</Class>
+        <Abstract>Analysis of SARS-CoV-2 genetic diversity within infected hosts can provide insight into the generation and spread of new viral variants and may enable high resolution inference of transmission chains. However, little is known about temporal aspects of SARS-CoV-2 intrahost diversity and the extent to which shared diversity reflects convergent evolution as opposed to transmission linkage. Here we use high depth of coverage sequencing to identify within-host genetic variants in 325 specimens from hospitalized COVID-19 patients and infected employees at a single medical center. We validated our variant calling by sequencing defined RNA mixtures and identified a viral load threshold that minimizes false positives. By leveraging clinical metadata, we found that intrahost diversity is low and does not vary by time from symptom onset. This suggests that variants will only rarely rise to appreciable frequency prior to transmission. Although there was generally little shared variation across the sequenced cohort, we identified intrahost variants shared across individuals who were unlikely to be related by transmission. These variants did not precede a rise in frequency in global consensus genomes, suggesting that intrahost variants may have limited utility for predicting future lineages. These results provide important context for sequence-based inference in SARS-CoV-2 evolution and epidemiology.</Abstract>
+    </Doc>
+</Data>

@@ -18,12 +18,12 @@ public class mathMethod {
 		for (int i = 0; i < max.length; i++) {
 			for (int j = 1; j <= max.length; j++) {
 				if (evalua.get(j).get(column) == max[i]) {
-					System.out.println("Similarity Doc "+(column+1)+" is Doc "+ j + " = "+ max[i]);
+					//System.out.println("Similarity Doc "+(column+1)+" is Doc "+ j + " = "+ max[i]);
 					num +=1;
 				}
 			}
 			if(num==5)break;
-		}System.out.println();
+		}
 	}
 	
 	//sort

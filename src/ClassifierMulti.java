@@ -77,9 +77,9 @@ public class ClassifierMulti {
 	protected static void processMulti(String path) throws ParserConfigurationException, SAXException, IOException {
 		stopword = Files.readAllLines(Paths.get("./dic/stopwordAndSpc_eng.txt"));
 		loadMultiData(path);
-		loadTrainsetMuti("./data/data-Diag",diagType,wordListdiag );
-		loadTrainsetMuti("./data/data-Reflec",reflecType,wordListreflec );
-		loadTrainsetMuti("./data/data-Sympt",sympType,wordListsymp );
+		loadTrainsetMuti("./data/SentenceTrain/data-Diag",diagType,wordListdiag );
+		loadTrainsetMuti("./data/SentenceTrain/data-Reflec",reflecType,wordListreflec );
+		loadTrainsetMuti("./data/SentenceTrain/data-Sympt",sympType,wordListsymp );
 		splitSentence();
 		vectorforMulti(Vt_sympST, VtTr_sympST, sympType, sympST, evaluaCosinesymp, evaluaBM25symp,evaluaKNNsymp,evaluaNVBsymp, wordListsymp);
 		vectorforMulti(Vt_diagST, VtTr_diagST, diagType, diagST, evaluaCosinediag, evaluaBM25diag,evaluaKNNdiag,evaluaNVBdiag, wordListdiag);
@@ -132,10 +132,8 @@ public class ClassifierMulti {
 		//end
 		
 		//KNN
-		//System.out.println(VtDocTr.size());
 		for (int i = 0; i < VtDoclist.size(); i++) {
 			evaluaKNN.add(knnAlgorithm.checkKNN(VtDoclist.get(i), VtDocTr));
-			//System.out.println(knnAlgorithm.checkKNN(VtDoclist.get(i), VtDocTr));
 			evaluaNVB.add(NaiveBayes.NVBST(VtDoclist.get(i), VtDocTr));
 			
 		}
@@ -151,7 +149,7 @@ public class ClassifierMulti {
 		for (int i = 0; i < evaluaKNNdiag.size(); i++) {
 			if (evaluaKNNdiag.get(i)<=4) {
 				if(originaldiagST.get(i).length() > 15 ) {
-					UsageModelPanel.showSentence(originaldiagST.get(i));
+					UsageModelPanel.showSentence(originaldiagST.get(i)+".");
 				}
 			}
 		}
@@ -160,7 +158,7 @@ public class ClassifierMulti {
 		for (int i = 0; i < evaluaKNNreflec.size(); i++) {
 			if (evaluaKNNreflec.get(i)<=4) {
 				if(originalreflecST.get(i).length() > 15 ) {
-					UsageModelPanel.showSentence(originalreflecST.get(i));
+					UsageModelPanel.showSentence(originalreflecST.get(i)+".");
 				}
 			}
 		}
@@ -169,7 +167,7 @@ public class ClassifierMulti {
 		for (int i = 0; i < evaluaKNNsymp.size(); i++) {
 			if (evaluaKNNsymp.get(i)<=4) {
 				if(originalsympST.get(i).length() > 15 ) {
-					UsageModelPanel.showSentence(originalsympST.get(i));
+					UsageModelPanel.showSentence(originalsympST.get(i)+".");
 				}
 			}
 		}
@@ -185,14 +183,14 @@ public class ClassifierMulti {
 			int d=0;
 			for (int j = 0; j <  evaluaCosinediag.get(1).size(); j++) {
 				//System.out.println(evaluaCosine.get(i).get(j));
-				if(evaluaCosinediag.get(i).get(j) >= 0.1) {
+				if(evaluaCosinediag.get(i).get(j) >= 0.45) {
 					d=1;
 				}
 			}
 			if(d==1) {
 				//System.out.println(originalDoc.get(i));
 				if(originaldiagST.get(i).length() > 15 ) {
-					UsageModelPanel.showSentence(originaldiagST.get(i));
+					UsageModelPanel.showSentence(originaldiagST.get(i)+".");
 				}
 			}
 		}
@@ -202,14 +200,14 @@ public class ClassifierMulti {
 			int d=0;
 			for (int j = 0; j <  evaluaCosinereflec.get(1).size(); j++) {
 				//System.out.println(evaluaCosine.get(i).get(j));
-				if(evaluaCosinereflec.get(i).get(j) >= 0.1) {
+				if(evaluaCosinereflec.get(i).get(j) >= 0.45) {
 					d=1;
 				}
 			}
 			if(d==1) {
 				//System.out.println(originalDoc.get(i));
 				if(originalreflecST.get(i).length() > 15 ) {
-					UsageModelPanel.showSentence(originalreflecST.get(i));
+					UsageModelPanel.showSentence(originalreflecST.get(i)+".");
 				}
 			}
 		}
@@ -219,14 +217,14 @@ public class ClassifierMulti {
 			int d=0;
 			for (int j = 0; j <  evaluaCosinesymp.get(1).size(); j++) {
 				//System.out.println(evaluaCosine.get(i).get(j));
-				if(evaluaCosinesymp.get(i).get(j) >= 0.1) {
+				if(evaluaCosinesymp.get(i).get(j) >= 0.45) {
 					d=1;
 				}
 			}
 			if(d==1) {
 				//System.out.println(originalDoc.get(i));
 				if(originalsympST.get(i).length() >  15) {
-					UsageModelPanel.showSentence(originalsympST.get(i));
+					UsageModelPanel.showSentence(originalsympST.get(i)+".");
 				}
 			}
 		}
@@ -238,27 +236,33 @@ public class ClassifierMulti {
 		//System.out.println("NVB");
 		UsageModelPanel.showSentence("Diagnosis :");
 		for (int i = 0; i < evaluaNVBdiag.size(); i++) {
-			if (evaluaNVBdiag.get(i)> 4.0) {
+			System.out.println(evaluaNVBdiag.get(i));
+			if (evaluaNVBdiag.get(i)>= 6.0d) {
+				System.out.println(originaldiagST.get(i));
 				if(originaldiagST.get(i).length() > 15 ) {
-					UsageModelPanel.showSentence(originaldiagST.get(i));
+					UsageModelPanel.showSentence(originaldiagST.get(i)+".");
 				}
 			}
 		}
 		UsageModelPanel.showSentence("\n");
 		UsageModelPanel.showSentence("Reflection :");
 		for (int i = 0; i < evaluaNVBreflec.size(); i++) {
-			if (evaluaNVBreflec.get(i)> 4.0) {
+			System.out.println(evaluaNVBreflec.get(i));
+			if (evaluaNVBreflec.get(i)>= 6.0d) {
+				System.out.println(originalreflecST.get(i));
 				if(originalreflecST.get(i).length() >  15 ) {
-					UsageModelPanel.showSentence(originalreflecST.get(i));
+					UsageModelPanel.showSentence(originalreflecST.get(i)+".");
 				}
 			}
 		}
 		UsageModelPanel.showSentence("\n");
 		UsageModelPanel.showSentence("Symptom :");
 		for (int i = 0; i < evaluaNVBsymp.size(); i++) {
-			if (evaluaNVBsymp.get(i)> 4.0) {
+			System.out.println(evaluaNVBsymp.get(i));
+			if (evaluaNVBsymp.get(i)>=6.0d) {
+				System.out.println(originalsympST.get(i));
 				if(originalsympST.get(i).length() >  15 ) {
-					UsageModelPanel.showSentence(originalsympST.get(i));
+					UsageModelPanel.showSentence(originalsympST.get(i)+".");
 				}
 			}
 		}
@@ -268,7 +272,7 @@ public class ClassifierMulti {
 	
 	//BM25+
 	protected static void getSTBM25() {
-		
+		UsageModelPanel.showSentence("Diagnosis :");
 		DecimalFormat df2 = new DecimalFormat("#.##");
 		for (int i = 0; i < evaluaBM25diag.size(); i++) {
 			Double sum = 0.0d;
@@ -276,18 +280,19 @@ public class ClassifierMulti {
 			for (int k = 0; k < evaluaBM25diag.get(0).size(); k++) {
 				
 				sum += sum + evaluaBM25diag.get(i).get(k);
-				if(evaluaBM25diag.get(i).get(k)>15.0d) {
+				if(evaluaBM25diag.get(i).get(k)>22.0d) {
 					d=1;
 				}
 			}
 			if(d==1) {
 				//System.out.println(originalDoc.get(i));
 				if(originaldiagST.get(i).length() > 15 ) {
-					UsageModelPanel.showSentence(originaldiagST.get(i));
+					UsageModelPanel.showSentence(originaldiagST.get(i)+".");
 				}
 			}
 		}
-		
+		UsageModelPanel.showSentence("\n");
+		UsageModelPanel.showSentence("Reflection :");
 		
 		for (int i = 0; i < evaluaBM25reflec.size(); i++) {
 			Double sum = 0.0d;
@@ -295,18 +300,19 @@ public class ClassifierMulti {
 			for (int k = 0; k < evaluaBM25reflec.get(0).size(); k++) {
 				
 				sum += sum + evaluaBM25reflec.get(i).get(k);
-				if(evaluaBM25reflec.get(i).get(k)>15.0d) {
+				if(evaluaBM25reflec.get(i).get(k)>22.0d) {
 					d=1;
 				}
 			}
 			if(d==1) {
 				//System.out.println(originalDoc.get(i));
 				if(originalreflecST.get(i).length() >  15 ) {
-					UsageModelPanel.showSentence(originalreflecST.get(i));
+					UsageModelPanel.showSentence(" "+originalreflecST.get(i)+".");
 				}
 			}
 		}
-		
+		UsageModelPanel.showSentence("\n");
+		UsageModelPanel.showSentence("Symptom :");
 		
 		for (int i = 0; i < evaluaBM25symp.size(); i++) {
 			Double sum = 0.0d;
@@ -314,14 +320,14 @@ public class ClassifierMulti {
 			for (int k = 0; k < evaluaBM25symp.get(0).size(); k++) {
 				
 				sum += sum + evaluaBM25symp.get(i).get(k);
-				if(evaluaBM25symp.get(i).get(k)>15.0d) {
+				if(evaluaBM25symp.get(i).get(k)>22.0d) {
 					d=1;
 				}
 			}
 			if(d==1) {
 				//System.out.println(originalDoc.get(i));
 				if(originalsympST.get(i).length() >  15 ) {
-					UsageModelPanel.showSentence(originalsympST.get(i));
+					UsageModelPanel.showSentence(originalsympST.get(i)+".");
 				}
 			}
 		}

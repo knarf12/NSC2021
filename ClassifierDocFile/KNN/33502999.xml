@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33502999</Doc_ID>
+        <Class>diagnosis</Class>
+        <Abstract>Background: The novel coronavirus disease 2019 (COVID-19) has negatively impacted mortality, economic conditions, and mental health and these impacts are likely to continue after the pandemic comes to an end. Objective: At present, no method has characterized the mental health burden of the pandemic distinct from pre-COVID-19 levels. Accurate detection of illness is critical to facilitate pandemic-related treatment to prevent worsening symptoms. Methods: An algorithm for the isolation of pandemic-related concerns on a large digital mental health service is reported that utilized natural language processing (NLP) on unstructured therapy transcript data, in parallel with brief clinical assessments of depression and anxiety symptoms. Results: Results demonstrate a significant increase in COVID-related intake anxiety symptoms, but no detectable difference in intake depression symptoms. Transcript analyses identified terms classifiable into 24 symptoms in excess of those included in the diagnostic criteria for anxiety and depression. Conclusions: Findings for this large digital therapy service suggest that treatment seekers are presenting with more severe intake anxiety levels than before the COVID-19 outbreak. Importantly, monitoring the symptoms identified in the study in addition to those for anxiety and depression is advised to fully capture the effects of COVID-19 on mental health.</Abstract>
+    </Doc>
+</Data>

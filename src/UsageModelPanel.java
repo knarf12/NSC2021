@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.ButtonGroup;
@@ -102,14 +103,18 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 		add(rdbtnPubmed);
 		
 		textArea = new JTextArea();
+		textArea.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		textArea.setBackground(Color.WHITE);
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 		
 		textArea_1 = new JTextArea();
+		textArea_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		textArea_1.setBackground(Color.WHITE);
 		textArea_1.setEditable(false);
+		textArea_1.setLineWrap(true);
+		textArea_1.setWrapStyleWord(true);
 		
 		bgSearch.add(rdbtnLocal);
 		bgSearch.add(rdbtnPubmed);
@@ -187,15 +192,12 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 		}
 		
 		if(obj.equals(btnProcess)) {
-			//System.out.println("Click Process... 2");
 			if(hsentence.docchoice.equalsIgnoreCase("singleDoc") && selected ) {
-				//System.out.println("siggle true");
 				ClassifierSentence.processSingle(txtSearch.getText());
 				CheckprocessSG = true;
 				CheckprocessML = false;
 				
 			}else if(hsentence.docchoice.equalsIgnoreCase("mutiDoc") && selected ) {
-				//System.out.println("muti true");
 				try {
 					System.out.println("Process");
 					ClassifierMulti.processMulti(txtSearch.getText());
@@ -217,12 +219,15 @@ public class UsageModelPanel extends JPanel implements ActionListener{
 		if(obj.equals(btnSearch)) {
 			setSearch();
 			if(hsentence.docchoice.equalsIgnoreCase("singleDoc")) {
+				clearSentence();
+				clearDoc();
 				JFileChooser fileChooser = new JFileChooser(); 
 				fileChooser.setCurrentDirectory(new java.io.File("."));
 				fileChooser.setAcceptAllFileFilterUsed(false);
 				if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 				      txtSearch.replaceSelection(""+ fileChooser.getSelectedFile());
 				      selected =true;
+				      File myObj = new File("./data/path/filepath.txt");
 				}else {
 				      System.out.println("No Selection ");
 				      selected =false;

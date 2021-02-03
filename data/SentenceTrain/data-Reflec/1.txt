@@ -1,0 +1,3 @@
+SARS-CoV-2 is spread primarily via respiratory droplets during close face-to-face contact.
+Infection can be spread by asymptomatic, presymptomatic, and symptomatic carriers.
+The average time from exposure to symptom onset is 5 days, and 97.5% of people who develop symptoms do so within 11.5 days. 

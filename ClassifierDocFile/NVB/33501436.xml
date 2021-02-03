@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33501436</Doc_ID>
+        <Class>diagnosis</Class>
+        <Abstract>The biosafety level-3 (BSL-3) requirement to culture severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) is a bottleneck for research and countermeasure development. Here we report a trans -complementation system that produces single-round infectious SARS-CoV-2 that recapitulates authentic viral replication. We demonstrate that the single-round infectious SARS-CoV-2 can be used at BSL-2 laboratories for high-throughput neutralization and antiviral testing. The trans -complementation system consists of two components: a genomic viral RNA containing a deletion of ORF3 and envelope gene, and a producer cell line expressing the two deleted genes. Trans- complementation of the two components generates virions that can infect naive cells for only one round, but does not produce wild-type SARS-CoV-2. Hamsters and K18-hACE2 transgenic mice inoculated with the complementation-derived virions exhibited no detectable disease, even after intracranial inoculation with the highest possible dose. The results suggest that the trans -complementation platform can be safely used at BSL-2 laboratories for research and countermeasure development.</Abstract>
+    </Doc>
+</Data>

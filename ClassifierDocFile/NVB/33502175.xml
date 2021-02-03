@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33502175</Doc_ID>
+        <Class>symptom</Class>
+        <Abstract>The emergence of the new coronavirus 2019 (COVID-19) was first seen in December 2019, which has spread rapidly and become a global pandemic. The number of cases of COVID-19 and its associated mortality have raised serious concerns worldwide. Early diagnosis of viral infection undoubtedly allows rapid intervention, disease management, and substantial control of the rapid spread of the disease. Currently, the standard approach for COVID-19 diagnosis globally is the RT-qPCR test; however, the limited access to kits and associated reagents, the need for specialized lab equipment, and the need for highly skilled personnel has led to a detection slowdown. Recently, the development of clustered regularly interspaced short palindromic repeats (CRISPR)-based diagnostic systems has reshaped molecular diagnosis. The benefits of the CRISPR system such as speed, precision, specificity, strength, efficiency, and versatility have inspired researchers to develop CRISPR-based diagnostic and therapeutic methods. With the global COVID-19 outbreak, different groups have begun to design and develop diagnostic and therapeutic programs based on the efficient CRISPR system. CRISPR-based COVID-19 diagnostic systems have advantages such as a high detection speed (i.e., 30 min from raw sample to reach a result), high sensitivity and precision, portability, and no need for specialized laboratory equipment. Here, we review contemporary studies on the detection of COVID-19 based on the CRISPR system.</Abstract>
+    </Doc>
+</Data>

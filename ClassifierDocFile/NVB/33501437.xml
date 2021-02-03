@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33501437</Doc_ID>
+        <Class>diagnosis</Class>
+        <Abstract>Coronavirus disease 2019 (COVID-19), caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), has resulted in millions of deaths worldwide and massive societal and economic burden. Recently, a new variant of SARS-CoV-2, known as B.1.1.7, was first detected in the United Kingdom and is spreading in several other countries, heightening public health concern and raising questions as to the resulting effectiveness of vaccines and therapeutic interventions. We and others previously identified host-directed therapies with antiviral efficacy against SARS-CoV-2 infection. Less prone to the development of therapy resistance, host-directed drugs represent promising therapeutic options to combat emerging viral variants as host genes possess a lower propensity to mutate compared to viral genes. Here, in the first study of the full-length B.1.1.7 variant virus, we find two host-directed drugs, plitidepsin (aplidin; inhibits translation elongation factor eEF1A) and ralimetinib (inhibits p38 MAP kinase cascade), as well as remdesivir, to possess similar antiviral activity against both the early-lineage SARS-CoV-2 and the B.1.1.7 variant, evaluated in both human gastrointestinal and lung epithelial cell lines. We find that plitidepsin is over an order of magnitude more potent than remdesivir against both viruses. These results highlight the importance of continued development of host-directed therapeutics to combat current and future coronavirus variant outbreaks.</Abstract>
+    </Doc>
+</Data>

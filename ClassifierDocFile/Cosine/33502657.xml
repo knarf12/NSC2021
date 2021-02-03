@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33502657</Doc_ID>
+        <Class>symptom</Class>
+        <Abstract>Purpose: To assess the relationships among pulmonary vascular enlargement, computed tomography (CT) findings quantified with software, and coronavirus disease (COVID-19) severity. Materials and methods: Ultra-high-resolution (UHR) CT images of 87 patients (50 males, 37 females; median age, 63 years) with COVID-19 confirmed using real-time polymerase chain reaction were analyzed. The maximum subsegmental vascular diameter was measured on CT. Total CT lung volume (CTLV total) and lesion extent (ratio of lesion volume to CTLV total) of ground-glass opacities, reticulation, and consolidation were measured using software. Maximum pulmonary vascular diameter and lesion extent were analyzed using Spearman's correlation analysis. Logistic regression analysis was performed on CT results to predict disease severity. We also assessed changes in these measures on follow-up scans in 16 patients. Results: All 23 patients with severe and critical illness had vascular enlargement (&gt; 4 mm). Pulmonary vascular enlargement (odds ratio 3.05, p = 0.018) and CT lesion extent (odds ratio 1.07, p = 0.002) were independent predictors of disease severity after adjustment for age and comorbidities. On follow-up CT, vascular diameter and CT lesion volume decreased (p = 0.001, p = 0.002; respectively), but CTLV total did not change significantly. Conclusion: Subsegmental vascular enlargement is a notable finding to predict acute COVID-19 disease severity.</Abstract>
+    </Doc>
+</Data>

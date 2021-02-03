@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33501440</Doc_ID>
+        <Class>symptom</Class>
+        <Abstract>SARS-CoV-2 infection of human cells is initiated by the binding of the viral Spike protein to its cell-surface receptor ACE2. We conducted an unbiased CRISPRi screen to uncover druggable pathways controlling Spike protein binding to human cells. We found that the protein BRD2 is an essential node in the cellular response to SARS-CoV-2 infection. BRD2 is required for ACE2 transcription in human lung epithelial cells and cardiomyocytes, and BRD2 inhibitors currently evaluated in clinical trials potently block endogenous ACE2 expression and SARS-CoV-2 infection of human cells. BRD2 also controls transcription of several other genes induced upon SARS-CoV-2 infection, including the interferon response, which in turn regulates ACE2 levels. It is possible that the previously reported interaction between the viral E protein and BRD2 evolved to manipulate the transcriptional host response during SARS-CoV-2 infection. Together, our results pinpoint BRD2 as a potent and essential regulator of the host response to SARS-CoV-2 infection and highlight the potential of BRD2 as a novel therapeutic target for COVID-19.</Abstract>
+    </Doc>
+</Data>

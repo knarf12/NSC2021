@@ -2,7 +2,7 @@
 <Data>
     <Doc>
         <Doc_ID>33400794</Doc_ID>
-        <Class>symptom</Class>
+        <Class>diagnosis</Class>
         <Abstract>We analyzed 21,676 residual specimens from Ontario, Canada collected between March-August, 2020 to investigate the effect of antibody decline on SARS-CoV-2 seroprevalence estimates. Testing specimens orthogonally using the Abbott (anti-nucleocapsid) and then the Ortho (anti-spike) assays, seroprevalence estimates ranged from 0.4%-1.4%, despite ongoing disease activity. The geometric mean concentration (GMC) of antibody-positive specimens decreased over time (p=0.015), and the GMC of antibody-negative specimens increased over time (p=0.0018). The association between the two tests decreased each month (p&lt;0.001), suggesting anti-N antibody decline. Lowering the Abbott antibody index cut-off from 1.4 to 0.7 resulted in a 16% increase in positive specimens.</Abstract>
     </Doc>
 </Data>

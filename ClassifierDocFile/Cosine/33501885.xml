@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33501885</Doc_ID>
+        <Class>diagnosis</Class>
+        <Abstract>The benefits of different levels of engagement with test, trace and isolate procedures are investigated for a pandemic in which there is little population immunity, in terms of productivity and public health. Simple mathematical modelling is used in the context of a single, relatively closed workplace such as a factory or back-office where, in normal operation, each worker has lengthy interactions with a fixed set of colleagues. A discrete-time SEIR model on a fixed interaction graph is simulated with parameters that are motivated by the recent COVID-19 pandemic in the UK during a post-peak phase, including a small risk of viral infection from outside the working environment. Two kinds of worker are assumed, transparents who regularly test, share their results with colleagues and isolate as soon as a contact tests positive for the disease, and opaques who do none of these. Moreover, the simulations are constructed as a 'playable model' in which the transparency level, disease parameters and mean interaction degree can be varied by the user. The model is also analysed in the continuum limit. All simulations point to the double benefit of transparency in both maximizing productivity and minimizing overall infection rates. Based on these findings, public policy implications are discussed for how to incentivise this mutually beneficial behaviour in different kinds of workplace, and simple recommendations are made.</Abstract>
+    </Doc>
+</Data>

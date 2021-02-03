@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33501467</Doc_ID>
+        <Class>diagnosis</Class>
+        <Abstract>Abstract: Large-scale deployment of safe and durably effective vaccines can halt the COVID-19 pandemic. 1-3 However, the high vaccine efficacy reported by ongoing phase 3 placebo-controlled clinical trials is based on a median follow-up time of only about two months 4-5 and thus does not pertain to long-term efficacy. To evaluate the duration of protection while allowing trial participants timely access to efficacious vaccine, investigators can sequentially cross placebo recipients to the vaccine arm according to priority groups. Here, we show how to estimate potentially time-varying placebo-controlled vaccine efficacy in this type of staggered vaccination of placebo recipients. In addition, we compare the performance of blinded and unblinded crossover designs in estimating long-term vaccine efficacy. Summary: We show how to estimate potentially waning long-term efficacy of COVID-19 vaccines in randomized, placebo-controlled clinical trials with staggered enrollment of participants and sequential crossover of placebo recipients.</Abstract>
+    </Doc>
+</Data>

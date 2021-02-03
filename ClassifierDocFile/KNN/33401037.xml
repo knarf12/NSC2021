@@ -2,7 +2,7 @@
 <Data>
     <Doc>
         <Doc_ID>33401037</Doc_ID>
-        <Class>reflection</Class>
+        <Class>diagnosis</Class>
         <Abstract>Objectives: Rapid antigen test (RAT) for coronavirus disease 2019 (COVID-19) has lower sensitivity but high accuracy during early-stage compared to reverse transcription-quantitative polymerase chain reaction (RT-qPCR). We aimed to investigate the concordance between the RAT and RT-qPCR results, and their prediction of disease transmission. Methods: This single-center retrospective observational study conducted from March 6 to June 14, 2020, included COVID-19 inpatients. We used nasopharyngeal swabs to perform RAT and RT-qPCR. The primary endpoint was concordance between RAT and RT-qPCR results. The secondary endpoints were the factors causing result disagreement and estimated transmissibility in RT-qPCR positive cases with mild symptoms. Results: Overall, 229 viral transport media (VTM) samples were obtained from 105 patients. The positive and negative concordance rates for VTM were 41% vs. 99% (κ 0.37) and 72% vs. 100% (κ 0.50) for samples collected on disease days 2-9. Body temperature increase (odds ratio [OR]: 0.54) and absence of drugs with potential antiviral effect (OR: 0.48) yielded conflicting results. RAT was associated with the ability to end isolation (OR: 0.11; 95% confidence interval: 0.20-0.61). Conclusions: The RAT and RT-qPCR results were highly consistent for samples collected at the appropriate time and could be useful for inferring the possibility of transmissibility.</Abstract>
     </Doc>
 </Data>

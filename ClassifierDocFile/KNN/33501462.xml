@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Doc>
+        <Doc_ID>33501462</Doc_ID>
+        <Class>diagnosis</Class>
+        <Abstract>Background: Upper respiratory samples used to test for SARS-CoV-2 virus may be infectious and present a hazard during transport and testing. A buffer with the ability to inactivate SARS-CoV-2 at the time of sample collection could simplify and expand testing for COVID-19 to non-conventional settings. Methods: We evaluated a guanidium thiocyanate-based buffer, eNAT™ (Copan) as a possible transport and inactivation medium for downstream RT-PCR testing to detect SARS-CoV-2. Inactivation of SARS-CoV-2 USA-WA1/2020 in eNAT and in diluted saliva was studied at different incubation times. The stability of viral RNA in eNAT was also evaluated for up to 7 days at room temperature (28°C), refrigerated conditions (4°C) and at 35°C. Results: SARS-COV-2 virus spiked directly in eNAT could be inactivated at &gt;5.6 log 10 PFU/ml within a minute of incubation. When saliva was diluted 1:1 in eNAT, no cytopathic effect (CPE) on vero-E6 cell lines was observed, although SARS-CoV-2 RNA could be detected even after 30 min incubation and after two cell culture passages. A 1:2 (saliva:eNAT) dilution abrogated both CPE and detectable viral RNA after as little as 5 min incubation in eNAT. SARS-CoV-2 RNA from virus spiked at 5X the limit of detection remained positive up to 7 days of incubation in all tested conditions. Conclusion: eNAT and similar guanidinium thiocyanate-based media may be of value for transport, preservation, and processing of clinical samples for RT-PCR based SARS-CoV-2 detection.</Abstract>
+    </Doc>
+</Data>
